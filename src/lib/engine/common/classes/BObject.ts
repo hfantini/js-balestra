@@ -19,37 +19,63 @@
 // == IMPORT(S)
 // ============================================================================
 
-import BError from "../../error/classes/BError";
+import Transform from "../../../math/classes/Transform";
 
 // == CLASSE(S)
 // ============================================================================
 
-class MathException extends BError
+class BOject implements IUpdatable, IDrawable
 {
 	// == ATTRIBUTES
 	// ========================================================================
 
 	// == VAR
+    private _id:string = "";
+    private _transform:Transform = new Transform();
 
 	// == CONST
 
 	// == CONSTRUCTOR(S)
 	// ========================================================================
 
-	constructor(message:string)
-	{
-		super(message);
-		this.name = "MathException";
-	}
+    constructor(id:string) 
+    {
+        this._id = id;
+    }
 
 	// == METHOD(S) & EVENT(S)
 	// ========================================================================
 
+    update(): void
+    {
+        
+    }
+
+    draw(): void
+    {
+        
+    }
+
 	// == GETTER(S) AND SETTER(S)
 	// ========================================================================
+
+    get id():string
+    {
+        return this._id;
+    }
+
+    get transform():Transform
+    {
+        return this._transform;
+    }
+    
+    set transform(value:Transform)
+    {
+        this._transform = value;
+    }
 };
 
 // == EXPORTS
 // ============================================================================
 
-export default MathException;
+export default BOject;

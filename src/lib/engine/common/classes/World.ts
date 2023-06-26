@@ -19,12 +19,12 @@
 // == IMPORT(S)
 // ============================================================================
 
-import BError from "../../error/classes/BError";
+import BOject from "./BObject";
 
 // == CLASSE(S)
 // ============================================================================
 
-class MathException extends BError
+abstract class World extends BOject implements IUpdatable, IDrawable
 {
 	// == ATTRIBUTES
 	// ========================================================================
@@ -36,14 +36,18 @@ class MathException extends BError
 	// == CONSTRUCTOR(S)
 	// ========================================================================
 
-	constructor(message:string)
-	{
-		super(message);
-		this.name = "MathException";
-	}
-
 	// == METHOD(S) & EVENT(S)
 	// ========================================================================
+
+    update(): void 
+    {
+
+    }
+
+    draw(): void
+    {
+
+    }
 
 	// == GETTER(S) AND SETTER(S)
 	// ========================================================================
@@ -51,5 +55,3 @@ class MathException extends BError
 
 // == EXPORTS
 // ============================================================================
-
-export default MathException;

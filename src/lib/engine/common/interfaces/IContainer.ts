@@ -16,40 +16,28 @@
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 */
 
+import BOject from "../classes/BObject";
+
 // == IMPORT(S)
 // ============================================================================
 
-import BError from "../../error/classes/BError";
-
-// == CLASSE(S)
+// == INTERFACE(S)
 // ============================================================================
 
-class MathException extends BError
+interface IContainer
 {
-	// == ATTRIBUTES
-	// ========================================================================
-
-	// == VAR
-
-	// == CONST
-
-	// == CONSTRUCTOR(S)
-	// ========================================================================
-
-	constructor(message:string)
-	{
-		super(message);
-		this.name = "MathException";
-	}
-
 	// == METHOD(S) & EVENT(S)
 	// ========================================================================
 
-	// == GETTER(S) AND SETTER(S)
-	// ========================================================================
+    addChild(value:BOject):void;
+    removeChild(value:string|BOject):void;
+    removeChildren(values:string[]|BOject[]):void;
+    getChild(id:string):BOject|undefined;
+    getChildren(id:string[]):BOject[];
+	count():number;
 };
 
 // == EXPORTS
 // ============================================================================
 
-export default MathException;
+export default IContainer;

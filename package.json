@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
     "preview": "vite preview"
   },
   "devDependencies": {

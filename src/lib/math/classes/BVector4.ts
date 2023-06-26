@@ -100,7 +100,7 @@ class BVector4 implements IBVector<BVector4>
 			this._Y = param[1];
 			this._Z = param[2];
 			this._W = param[3];
-		}				
+		}			
 	}
 
 	// == METHOD(S) & EVENT(S)

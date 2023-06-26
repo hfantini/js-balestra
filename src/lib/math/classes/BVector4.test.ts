@@ -7,6 +7,9 @@ import BVector3 from "./BVector3";
 import BVector4 from "./BVector4";
 import MathException from "./MathException";
 
+// == MOCK FUNCTION(S)
+// ============================================================================
+
 // == TEST SUITE(S)
 // ============================================================================
 

@@ -39,6 +39,7 @@ class InvalidParamException extends BError
     public constructor(message: string)
     {
         super(message);
+		this.name = "InvalidParamException";
     }
 
 	// == METHOD(S) & EVENT(S)
