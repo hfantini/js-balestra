@@ -16,28 +16,51 @@
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 */
 
-import BObject from "../classes/BObject";
-
 // == IMPORT(S)
 // ============================================================================
 
-// == INTERFACE(S)
+import IContainer from "../interfaces/IContainer";
+import BObject from "./BObject";
+
+// == CLASSE(S)
 // ============================================================================
 
-interface IContainer
+class BWorld extends BObject implements IUpdatable, IDrawable
 {
+	// == ATTRIBUTES
+	// ========================================================================
+
+	// == VAR
+	protected _container:IContainer|undefined = undefined;
+
+	// == CONST
+
+	// == CONSTRUCTOR(S)
+	// ========================================================================
+
 	// == METHOD(S) & EVENT(S)
 	// ========================================================================
 
-    addChild(value:BObject):void;
-    removeChild(value:string|BObject):void;
-    removeChildren(values:string[]|BObject[]):void;
-    getChild(id:string):BObject|undefined;
-    getChildren(id:string[]):BObject[];
-	count():number;
+	draw(): void
+	{
+
+	}
+
+	update(): void
+	{
+
+	}
+
+	// == GETTER(S) AND SETTER(S)
+	// ========================================================================
+
+	get container():IContainer|undefined
+	{
+		return this._container;
+	}
 };
 
 // == EXPORTS
 // ============================================================================
 
-export default IContainer;
+export default BWorld;

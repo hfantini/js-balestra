@@ -18,7 +18,7 @@
 
 import InvalidParamException from "../../../error/classes/InvalidParamException";
 import BContainer from "./BContainer";
-import BOject from "./BObject";
+import BObject from "./BObject";
 
 // == IMPORT(S)
 // ============================================================================
@@ -28,22 +28,22 @@ import BOject from "./BObject";
 
 const mockContainer = ():BContainer =>
 {
-    const parent = new BOject("ApertureScience");
+    const parent = new BObject("ApertureScience");
     const retValue = new BContainer(parent);
 
-    const obj1 = new BOject("CompanionCube")
+    const obj1 = new BObject("CompanionCube")
     retValue.addChild(obj1)
 
-    const obj2 = new BOject("Turret")
+    const obj2 = new BObject("Turret")
     retValue.addChild(obj2)
 
-    const obj3 = new BOject("Cake")
+    const obj3 = new BObject("Cake")
     retValue.addChild(obj3)
     
-    const obj4 = new BOject("PortalGun")
+    const obj4 = new BObject("PortalGun")
     retValue.addChild(obj4)       
 
-    const obj5 = new BOject("Cheel")
+    const obj5 = new BObject("Cheel")
     retValue.addChild(obj5)           
 
     return retValue;
@@ -71,7 +71,7 @@ describe("BContainer Tests", () => {
 
     test("Constructor #2: Should create a instance with default values", () => 
     {
-        const parent = new BOject("AppertureScience");
+        const parent = new BObject("AppertureScience");
         const container = new BContainer(parent);
 
         expect(container).toBeDefined();
@@ -82,7 +82,7 @@ describe("BContainer Tests", () => {
     test("Method addChild: Should add new object in the container data", () =>
     {
         let container = mockContainer();
-        container.addChild( new BOject("TestChamber20") )
+        container.addChild( new BObject("TestChamber20") )
 
         expect(container.count()).toBe(6);
         expect(container.getChild("TestChamber20")).toBeDefined();
@@ -94,7 +94,7 @@ describe("BContainer Tests", () => {
         
         expect( () =>
         {
-            container.addChild( new BOject("Cheel") )
+            container.addChild( new BObject("Cheel") )
         } ).toThrow(InvalidParamException);
     })
     
@@ -110,7 +110,7 @@ describe("BContainer Tests", () => {
     test("Method removeChild: Should remove a existing element from object", () =>
     {
         let container = mockContainer();
-        const obj = new BOject("Turret");
+        const obj = new BObject("Turret");
         container.removeChild(obj);
 
         expect(container.count()).toBe(4);

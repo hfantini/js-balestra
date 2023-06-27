@@ -16,28 +16,44 @@
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 */
 
-import BObject from "../classes/BObject";
-
 // == IMPORT(S)
 // ============================================================================
 
-// == INTERFACE(S)
+import BObject from "../../../common/classes/BObject";
+import RectTransform from "./RectTransform";
+
+// == CLASSE(S)
 // ============================================================================
 
-interface IContainer
+class BObject2D extends BObject implements IUpdatable, IDrawable
 {
+	// == ATTRIBUTES
+	// ========================================================================
+
+	// == VAR
+
+	// == CONST
+
+	// == CONSTRUCTOR(S)
+	// ========================================================================
+
+	constructor(id:string, parent?:BObject) 
+	{
+		super(id, parent);
+		this.transform = new RectTransform(this);
+	}
+
+	update(): void { }
+	draw(): void { }
+
 	// == METHOD(S) & EVENT(S)
 	// ========================================================================
 
-    addChild(value:BObject):void;
-    removeChild(value:string|BObject):void;
-    removeChildren(values:string[]|BObject[]):void;
-    getChild(id:string):BObject|undefined;
-    getChildren(id:string[]):BObject[];
-	count():number;
+	// == GETTER(S) AND SETTER(S)
+	// ========================================================================
 };
 
 // == EXPORTS
 // ============================================================================
 
-export default IContainer;
+export default BObject2D;

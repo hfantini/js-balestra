@@ -16,28 +16,35 @@
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 */
 
-import BObject from "../classes/BObject";
-
 // == IMPORT(S)
 // ============================================================================
 
-// == INTERFACE(S)
+import BObject2D from "../../common/classes/BObject2D";
+
+
+// == CLASSE(S)
 // ============================================================================
 
-interface IContainer
+class BObject2DCanvas extends BObject2D
 {
+	// == ATTRIBUTES
+	// ========================================================================
+
+	// == VAR
+
+	// == CONST
+
+	// == CONSTRUCTOR(S)
+	// ========================================================================
+
 	// == METHOD(S) & EVENT(S)
 	// ========================================================================
 
-    addChild(value:BObject):void;
-    removeChild(value:string|BObject):void;
-    removeChildren(values:string[]|BObject[]):void;
-    getChild(id:string):BObject|undefined;
-    getChildren(id:string[]):BObject[];
-	count():number;
+	// == GETTER(S) AND SETTER(S)
+	// ========================================================================
 };
 
 // == EXPORTS
 // ============================================================================
 
-export default IContainer;
+export default BObject2DCanvas;

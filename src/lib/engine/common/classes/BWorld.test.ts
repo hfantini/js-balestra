@@ -16,28 +16,28 @@
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 */
 
-import BObject from "../classes/BObject";
+import BWorld from "./BWorld";
 
 // == IMPORT(S)
 // ============================================================================
 
-// == INTERFACE(S)
+// == MOCK FUNCTION(S)
 // ============================================================================
 
-interface IContainer
-{
-	// == METHOD(S) & EVENT(S)
-	// ========================================================================
-
-    addChild(value:BObject):void;
-    removeChild(value:string|BObject):void;
-    removeChildren(values:string[]|BObject[]):void;
-    getChild(id:string):BObject|undefined;
-    getChildren(id:string[]):BObject[];
-	count():number;
-};
-
-// == EXPORTS
+// == TEST SUITE(S)
 // ============================================================================
 
-export default IContainer;
+describe("BWorld Tests", () => {
+
+    // == TEST ACTIONS(S)
+    // ========================================================================
+
+    // == TEST CASE(S)
+    // ========================================================================
+
+    test("Getter container: Should return an undefined value", () => 
+    {
+        const world = new BWorld("BlackMesa");
+        expect(world.container).not.toBeDefined();
+    });
+} );

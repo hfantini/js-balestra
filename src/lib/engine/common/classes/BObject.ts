@@ -24,36 +24,56 @@ import Transform from "../../../math/classes/Transform";
 // == CLASSE(S)
 // ============================================================================
 
-class BOject implements IUpdatable, IDrawable
+class BObject
 {
 	// == ATTRIBUTES
 	// ========================================================================
 
 	// == VAR
     private _id:string = "";
-    private _transform:Transform = new Transform();
+    private _transform:Transform = new Transform(this);
+    private _parent:BObject|undefined = undefined;
 
 	// == CONST
 
 	// == CONSTRUCTOR(S)
 	// ========================================================================
 
-    constructor(id:string) 
+    constructor(id:string, parent?:BObject) 
     {
         this._id = id;
+        this._parent = parent;
     }
 
 	// == METHOD(S) & EVENT(S)
 	// ========================================================================
 
-    update(): void
+    getParentByType<T>(type: any):T|undefined
     {
-        
-    }
+        let retValue:any = undefined;
 
-    draw(): void
-    {
-        
+        if(this._parent)
+        {
+            let lastParent = this.parent;
+
+            while(!retValue)
+            {
+                if(!lastParent)
+                {
+                    break;
+                }
+                else if(lastParent instanceof type)
+                {
+                    retValue = lastParent;
+                }
+                else
+                {
+                    lastParent = lastParent.parent;
+                }
+            }
+        }
+
+        return retValue as T;
     }
 
 	// == GETTER(S) AND SETTER(S)
@@ -63,6 +83,16 @@ class BOject implements IUpdatable, IDrawable
     {
         return this._id;
     }
+
+    get parent():BObject|undefined
+    {
+        return this._parent;
+    }
+
+    set parent(value:BObject|undefined)
+    {
+        this._parent = value;
+    }    
 
     get transform():Transform
     {
@@ -78,4 +108,4 @@ class BOject implements IUpdatable, IDrawable
 // == EXPORTS
 // ============================================================================
 
-export default BOject;
+export default BObject;

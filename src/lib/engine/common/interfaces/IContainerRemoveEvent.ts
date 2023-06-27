@@ -16,28 +16,22 @@
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 */
 
-import BObject from "../classes/BObject";
-
 // == IMPORT(S)
 // ============================================================================
+
+import BObject from "../classes/BObject";
+import BWorld from "../classes/BWorld";
 
 // == INTERFACE(S)
 // ============================================================================
 
-interface IContainer
+interface IContainerRemoveEvent
 {
-	// == METHOD(S) & EVENT(S)
-	// ========================================================================
-
-    addChild(value:BObject):void;
-    removeChild(value:string|BObject):void;
-    removeChildren(values:string[]|BObject[]):void;
-    getChild(id:string):BObject|undefined;
-    getChildren(id:string[]):BObject[];
-	count():number;
+	world?: BWorld;
+	object: BObject;
 };
 
 // == EXPORTS
 // ============================================================================
 
-export default IContainer;
+export default IContainerRemoveEvent;

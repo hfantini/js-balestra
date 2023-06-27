@@ -18,7 +18,7 @@
 
 import InvalidParamException from "../../../error/classes/InvalidParamException";
 import IContainer from "../interfaces/IContainer";
-import BOject from "./BObject";
+import BObject from "./BObject";
 
 // == IMPORT(S)
 // ============================================================================
@@ -33,15 +33,15 @@ class BContainer implements IContainer
 
 	// == VAR
 
-    private _parent:BOject|undefined = undefined;
-    private _data:Map<string, BOject> = new Map<string, BOject>();
+    private _parent:BObject|undefined = undefined;
+    private _data:Map<string, BObject> = new Map<string, BObject>();
 
 	// == CONST
 
 	// == CONSTRUCTOR(S)
 	// ========================================================================
 
-    constructor(parent?:BOject)
+    constructor(parent?:BObject)
     {
         this._parent = parent;
     }
@@ -49,27 +49,30 @@ class BContainer implements IContainer
 	// == METHOD(S) & EVENT(S)
 	// ========================================================================
 
-    addChild(value:BOject): void
+    addChild(value:BObject): void
     {
         if(this._data.has(value.id))
         {
             throw new InvalidParamException(`BObject with name [${value.id}] already exists.`);
         }
 
+        value.parent = this.parent;
         this._data.set(value.id, value);
     }
 
-    removeChild(value: string | BOject): void
+    removeChild(value: string | BObject): void
     {
         let id = typeof value === 'string' ? value : value.id;
+        const obj = this._data.get(id);
 
-        if(this._data.has(id))
+        if(obj)
         {
+            obj.parent = undefined;
             this._data.delete(id);
         }
     }
 
-    removeChildren(values: string[] | BOject[]): void
+    removeChildren(values: string[] | BObject[]): void
     {
         values.forEach( (value) =>
         {
@@ -77,14 +80,14 @@ class BContainer implements IContainer
         });
     }
 
-    getChild(id: string):BOject|undefined
+    getChild(id: string):BObject|undefined
     {
         return this._data.get(id);
     }
 
-    getChildren(id: string[]): BOject[]
+    getChildren(id: string[]): BObject[]
     {
-        let retValue = new Array<BOject>();
+        let retValue = new Array<BObject>();
         
         id.forEach((value) => {
             const obj = this.getChild(value);
@@ -105,7 +108,7 @@ class BContainer implements IContainer
 	// == GETTER(S) AND SETTER(S)
 	// ========================================================================
 
-    get parent():BOject|undefined
+    get parent():BObject|undefined
     {
         return this._parent;
     }

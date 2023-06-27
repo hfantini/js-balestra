@@ -16,6 +16,7 @@
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 */
 
+import BObject from "../../engine/common/classes/BObject";
 import BVector3 from "./BVector3";
 
 // == IMPORT(S)
@@ -30,6 +31,7 @@ class Transform
 	// ========================================================================
 
 	// == VAR
+    private _parent:BObject|undefined = undefined;
     private _position:BVector3 = new BVector3();
     private _scale:BVector3 = new BVector3(1);
     private _rotation:BVector3 = new BVector3();
@@ -40,31 +42,35 @@ class Transform
 	// == CONSTRUCTOR(S)
 	// ========================================================================
 
-    constructor();
-    constructor(position?: BVector3, scale?: BVector3, rotation?: BVector3, origin?:BVector3);
+    constructor(parent:BObject, position?: BVector3, scale?: BVector3, rotation?: BVector3, origin?:BVector3);
 
     constructor(...param: any[])
     {
+        if(param[0])
+        {
+            this._parent = param[0];
+        }
+
         if(param.length > 0)
         {
-            if(param[0])
-            {
-                this._position = param[0];
-            }
-
             if(param[1])
             {
-                this._scale = param[1];
+                this._position = param[1];
             }
 
             if(param[2])
             {
-                this._rotation = param[2];
+                this._scale = param[2];
             }
 
             if(param[3])
             {
-                this._origin = param[3];
+                this._rotation = param[3];
+            }
+
+            if(param[4])
+            {
+                this._origin = param[4];
             }
         }
     }
@@ -74,6 +80,11 @@ class Transform
 
 	// == GETTER(S) AND SETTER(S)
 	// ========================================================================
+
+    get parent():BObject|undefined
+    {
+        return this._parent;
+    }
 
     get position():BVector3
     {
