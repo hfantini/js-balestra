@@ -16,41 +16,23 @@
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 */
 
+import BRenderGear from "../classes/BRenderGear";
+
 // == IMPORT(S)
 // ============================================================================
 
-import BRenderGear from "../../../graphics/common/classes/BRenderGear";
-import IDrawable from "../../../graphics/common/interfaces/IDrawable";
-import BObject from "./BObject";
-
-// == CLASSE(S)
+// == INTERFACE(S)
 // ============================================================================
 
-class BWorld extends BObject implements IDrawable
+interface IDrawable
 {
-	// == ATTRIBUTES
-	// ========================================================================
-
-	// == VAR
-
-	// == CONST
-
-	// == CONSTRUCTOR(S)
-	// ========================================================================
-
 	// == METHOD(S) & EVENT(S)
 	// ========================================================================
 
-	draw(_renderGear:BRenderGear): void
-	{
-
-	}
-
-	// == GETTER(S) AND SETTER(S)
-	// ========================================================================
+	draw(renderGear:BRenderGear):void;
 };
 
 // == EXPORTS
 // ============================================================================
 
-export default BWorld;
+export default IDrawable;

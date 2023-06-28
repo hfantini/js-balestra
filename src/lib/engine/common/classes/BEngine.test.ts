@@ -76,10 +76,11 @@ describe("BEngine Tests", () => {
         expect(spy).toBeCalledTimes(1);
     })
     
-    test("Method tick: should call draw method", () => 
+    test("Method tick: should call world draw method", () => 
     {
-        const engine = new BEngine("Engine");
-        const spy = jest.spyOn(engine, "draw");
+        const world = new BWorld("City17")
+        const engine = new BEngine("Engine", world);
+        const spy = jest.spyOn(world, "draw");
 
         engine.tick(1000);
 
@@ -114,7 +115,7 @@ describe("BEngine Tests", () => {
         const engine = new BEngine("Engine", world);
         const spy = jest.spyOn(world, "draw");
 
-        engine.draw();
+        engine.tick(1000);
 
         expect(spy).toBeCalledTimes(1);
     })
@@ -125,7 +126,7 @@ describe("BEngine Tests", () => {
         const engine = new BEngine("Engine");
         const spy = jest.spyOn(world, "draw");
 
-        engine.draw();
+        engine.tick(1000);
 
         expect(spy).not.toBeCalled();
     }) 

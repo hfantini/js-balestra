@@ -19,54 +19,58 @@
 // == IMPORT(S)
 // ============================================================================
 
-import BRenderGear from "../../../../graphics/common/classes/BRenderGear";
-import BObject from "../../../common/classes/BObject";
+import BError from "../../../../error/classes/BError";
+import BEngine from "../../../common/classes/BEngine";
 import BWorld from "../../../common/classes/BWorld";
-import BContainerWorldCanvas from "./BContainerWorldCanvas";
 
 // == CLASSE(S)
 // ============================================================================
 
-class BWorldCanvas extends BWorld
+class BEngineCanvas extends BEngine
 {
 	// == ATTRIBUTES
 	// ========================================================================
 
 	// == VAR
+    
+    private _canvas:HTMLCanvasElement;
+    private _context:CanvasRenderingContext2D;
 
 	// == CONST
 
 	// == CONSTRUCTOR(S)
 	// ========================================================================
 
-    constructor(id:string, parent?:BObject)
-    {
-        super(id, parent);
-		this._container = new BContainerWorldCanvas(this);
-    }
-
-	// == METHOD(S) & EVENT(S)
-	// ========================================================================
-
-	draw(renderGear:BRenderGear): void
+	constructor(id:string, canvas:HTMLCanvasElement, world?:BWorld)
 	{
-		super.draw(renderGear);
-		
-		if(this._container && this._container instanceof BContainerWorldCanvas)
-		{
-			let currentContainer = this._container as BContainerWorldCanvas;
-			currentContainer.elementBuffer.forEach( (element) => 
-			{
-				element.draw(renderGear);
-			});
-		}
+		super(id, world);
+        this._canvas = canvas;
+
+        const context = this._canvas.getContext("2d");
+
+        if(!context)
+        {
+            throw new BError("Canvas is not supported by this device");
+        }
+
+        this._context = context;
 	}
 
 	// == GETTER(S) AND SETTER(S)
 	// ========================================================================
+
+    get canvas():HTMLCanvasElement
+    {
+        return this._canvas;
+    }
+
+    get context():CanvasRenderingContext2D
+    {
+        return this._context;
+    }
 };
 
 // == EXPORTS
 // ============================================================================
 
-export default BWorldCanvas;
+export default BEngineCanvas;

@@ -16,11 +16,12 @@
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 */
 
+import createRenderingContext2DMock from "../mocks/CanvasRenderingContext2DMock";
+import createHTMLCanvasElementMock from "../mocks/HTMLCanvasElementMock";
+import BRenderGearCanvas from "./BRenderGearCanvas";
+
 // == IMPORT(S)
 // ============================================================================
-
-import BTime from "./BTime";
-import BUpdateGear from "./BUpdateGear";
 
 // == MOCK FUNCTION(S)
 // ============================================================================
@@ -28,21 +29,23 @@ import BUpdateGear from "./BUpdateGear";
 // == TEST SUITE(S)
 // ============================================================================
 
-describe("BUpdateGear Tests", () => 
+describe("BRenderGearCanvas Tests", () => 
 {
-
     // == TEST ACTIONS(S)
     // ========================================================================
 
     // == TEST CASE(S)
     // ========================================================================
 
-    test("Constructor #1: Should build an instance with default values", () => 
+    test("Constructor #1: Should create an instance with default values", () => 
     {
-        const time = new BTime();
-        const updateGear = new BUpdateGear(time);
+        const htmlCanvasElement = createHTMLCanvasElementMock();
+        const renderingContext2D = createRenderingContext2DMock();
 
-        expect(updateGear).toBeDefined();
-        expect(updateGear.time).toMatchObject(time);
+		const renderGear = new BRenderGearCanvas(htmlCanvasElement, renderingContext2D);
+
+        expect(renderGear).toBeDefined();
+        expect(renderGear.canvas).toMatchObject(htmlCanvasElement);
+        expect(renderGear.context).toMatchObject(renderingContext2D);
     });
 } );

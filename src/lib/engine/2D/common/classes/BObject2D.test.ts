@@ -19,6 +19,7 @@
 // == IMPORT(S)
 // ============================================================================
 
+import createBRenderGearCanvasMock from "../../../../graphics/2D/canvas/mocks/BRenderGearCanvasMock";
 import BObject2D from "./BObject2D";
 import BRectTransform from "./BRectTransform";
 
@@ -47,7 +48,7 @@ describe("BObject2D Tests", () =>
     {
         let obj = new BObject2D("PortalGun");
         expect(() => {
-            obj.draw()
+            obj.draw(createBRenderGearCanvasMock())
         }).not.toThrow();
     })
 } );

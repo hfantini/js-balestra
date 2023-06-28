@@ -19,6 +19,7 @@
 // == IMPORT(S)
 // ============================================================================
 
+import BRenderGear from "../../../graphics/common/classes/BRenderGear";
 import BObject from "./BObject";
 import BTime from "./BTime";
 import BUpdateGear from "./BUpdateGear";
@@ -60,7 +61,11 @@ class BEngine extends BObject
 		// UPDATE & DRAW
 
 		this.update( new BUpdateGear(this._time) );
-		this.draw();
+
+		if(this._world)
+		{
+			this._world.draw(new BRenderGear());
+		}
     }
 
 	update(updateGear:BUpdateGear) 
@@ -70,14 +75,6 @@ class BEngine extends BObject
 		if(this._world)
 		{
 			this._world.update(updateGear);
-		}
-	}
-
-	draw()
-	{
-		if(this._world)
-		{
-			this._world.draw();
 		}
 	}
 

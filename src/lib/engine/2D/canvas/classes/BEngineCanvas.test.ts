@@ -16,11 +16,12 @@
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 */
 
+import BError from "../../../../error/classes/BError";
+import createHTMLCanvasElementMock, { createHTMLCanvasElementUnsupportedMock } from "../../../../graphics/2D/canvas/mocks/HTMLCanvasElementMock";
+import BEngineCanvas from "./BEngineCanvas";
+
 // == IMPORT(S)
 // ============================================================================
-
-import BTime from "./BTime";
-import BUpdateGear from "./BUpdateGear";
 
 // == MOCK FUNCTION(S)
 // ============================================================================
@@ -28,7 +29,7 @@ import BUpdateGear from "./BUpdateGear";
 // == TEST SUITE(S)
 // ============================================================================
 
-describe("BUpdateGear Tests", () => 
+describe("BEngineCanvas Tests", () => 
 {
 
     // == TEST ACTIONS(S)
@@ -37,12 +38,17 @@ describe("BUpdateGear Tests", () =>
     // == TEST CASE(S)
     // ========================================================================
 
-    test("Constructor #1: Should build an instance with default values", () => 
-    {
-        const time = new BTime();
-        const updateGear = new BUpdateGear(time);
-
-        expect(updateGear).toBeDefined();
-        expect(updateGear.time).toMatchObject(time);
+    test("Constructor #1: Should create an instance with default values", () => 
+	{
+		const engine = new BEngineCanvas("Source2", createHTMLCanvasElementMock());
+        
+        expect(engine).toBeDefined();
+        expect(engine.canvas).toBeDefined();
+        expect(engine.context).toBeDefined();
     });
+
+    test("Constructor #2: Should throw an exception with a device that doesn't support canvas", () => 
+	{
+		expect(() => new BEngineCanvas("Source2", createHTMLCanvasElementUnsupportedMock())).toThrowError(BError)
+    });    
 } );

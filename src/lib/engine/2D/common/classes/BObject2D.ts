@@ -20,8 +20,9 @@
 // ============================================================================
 
 import BObject from "../../../common/classes/BObject";
-import IDrawable from "../../../common/interfaces/IDrawable";
+import IDrawable from "../../../../graphics/common/interfaces/IDrawable";
 import BRectTransform from "./BRectTransform";
+import BRenderGear from "../../../../graphics/common/classes/BRenderGear";
 
 // == CLASSE(S)
 // ============================================================================
@@ -44,7 +45,7 @@ class BObject2D extends BObject implements IDrawable
 		this.transform = new BRectTransform(this);
 	}
 
-	draw(): void { }
+	draw(_renderGear:BRenderGear): void { }
 
 	// == METHOD(S) & EVENT(S)
 	// ========================================================================

@@ -19,15 +19,10 @@
 // == IMPORT(S)
 // ============================================================================
 
-import BRenderGear from "../../../../graphics/common/classes/BRenderGear";
-import BObject from "../../../common/classes/BObject";
-import BWorld from "../../../common/classes/BWorld";
-import BContainerWorldCanvas from "./BContainerWorldCanvas";
-
 // == CLASSE(S)
 // ============================================================================
 
-class BWorldCanvas extends BWorld
+class BRenderGear
 {
 	// == ATTRIBUTES
 	// ========================================================================
@@ -39,28 +34,8 @@ class BWorldCanvas extends BWorld
 	// == CONSTRUCTOR(S)
 	// ========================================================================
 
-    constructor(id:string, parent?:BObject)
-    {
-        super(id, parent);
-		this._container = new BContainerWorldCanvas(this);
-    }
-
 	// == METHOD(S) & EVENT(S)
 	// ========================================================================
-
-	draw(renderGear:BRenderGear): void
-	{
-		super.draw(renderGear);
-		
-		if(this._container && this._container instanceof BContainerWorldCanvas)
-		{
-			let currentContainer = this._container as BContainerWorldCanvas;
-			currentContainer.elementBuffer.forEach( (element) => 
-			{
-				element.draw(renderGear);
-			});
-		}
-	}
 
 	// == GETTER(S) AND SETTER(S)
 	// ========================================================================
@@ -69,4 +44,4 @@ class BWorldCanvas extends BWorld
 // == EXPORTS
 // ============================================================================
 
-export default BWorldCanvas;
+export default BRenderGear;

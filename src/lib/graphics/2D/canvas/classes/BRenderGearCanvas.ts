@@ -19,54 +19,51 @@
 // == IMPORT(S)
 // ============================================================================
 
-import BRenderGear from "../../../../graphics/common/classes/BRenderGear";
-import BObject from "../../../common/classes/BObject";
-import BWorld from "../../../common/classes/BWorld";
-import BContainerWorldCanvas from "./BContainerWorldCanvas";
+import BRenderGear from "../../../common/classes/BRenderGear";
 
 // == CLASSE(S)
 // ============================================================================
 
-class BWorldCanvas extends BWorld
+class BRenderGearCanvas extends BRenderGear
 {
 	// == ATTRIBUTES
 	// ========================================================================
 
 	// == VAR
+    protected _canvas:HTMLCanvasElement;
+    protected _context:CanvasRenderingContext2D;
 
 	// == CONST
 
 	// == CONSTRUCTOR(S)
 	// ========================================================================
 
-    constructor(id:string, parent?:BObject)
+    constructor(canvas:HTMLCanvasElement, context:CanvasRenderingContext2D)
     {
-        super(id, parent);
-		this._container = new BContainerWorldCanvas(this);
-    }
+        super();
+
+        this._canvas = canvas;
+        this._context = context;
+    };
 
 	// == METHOD(S) & EVENT(S)
 	// ========================================================================
 
-	draw(renderGear:BRenderGear): void
-	{
-		super.draw(renderGear);
-		
-		if(this._container && this._container instanceof BContainerWorldCanvas)
-		{
-			let currentContainer = this._container as BContainerWorldCanvas;
-			currentContainer.elementBuffer.forEach( (element) => 
-			{
-				element.draw(renderGear);
-			});
-		}
-	}
-
 	// == GETTER(S) AND SETTER(S)
 	// ========================================================================
+
+    get canvas():HTMLCanvasElement
+    {
+        return this._canvas;
+    }
+
+    get context():CanvasRenderingContext2D
+    {
+        return this._context;
+    }
 };
 
 // == EXPORTS
 // ============================================================================
 
-export default BWorldCanvas;
+export default BRenderGearCanvas;

@@ -16,6 +16,7 @@
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 */
 
+import createBRenderGearCanvasMock from "../../../../graphics/2D/canvas/mocks/BRenderGearCanvasMock";
 import BContainerWorldCanvas from "./BContainerWorldCanvas";
 import BObject2DCanvas from "./BObject2DCanvas";
 import BWorldCanvas from "./BWorldCanvas";
@@ -54,7 +55,7 @@ describe("BWorldCanvas Tests", () =>
         const spyContainer = jest.spyOn(BContainerWorldCanvas.prototype, "elementBuffer", "get");
 
         world.container.addChild(obj);
-        world.draw();
+        world.draw(createBRenderGearCanvasMock());
 
         expect(spyContainer).toBeCalled();
         expect(spyObj).toBeCalled();

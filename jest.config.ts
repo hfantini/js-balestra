@@ -7,6 +7,7 @@ const config: Config = {
     transform: {
         '^.+\\.ts?$': 'ts-jest',
     },
+    setupFiles: ["jest-canvas-mock"],
     transformIgnorePatterns: ['<rootDir>/node_modules/'],
     coverageThreshold: {
         global: {
@@ -15,7 +16,10 @@ const config: Config = {
             branches: 95,
             statements: 95
         }
-    }
+    },
+    coveragePathIgnorePatterns: [
+        "mocks"
+    ]
 };
 
 export default config;
