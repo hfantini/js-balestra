@@ -34,6 +34,7 @@ interface IContainer
     removeChildren(values:string[]|BObject[]):void;
     getChild(id:string):BObject|undefined;
     getChildren(id:string[]):BObject[];
+	getAllChildren():BObject[];
 	count():number;
 };
 

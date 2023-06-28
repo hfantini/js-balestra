@@ -16,10 +16,10 @@
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 */
 
+import BMathException from "./BMathException";
+
 // == IMPORT(S)
 // ============================================================================
-
-import InvalidParamException from "./InvalidParamException";
 
 // == MOCK FUNCTION(S)
 // ============================================================================
@@ -27,7 +27,7 @@ import InvalidParamException from "./InvalidParamException";
 // == TEST SUITE(S)
 // ============================================================================
 
-describe("InvalidParamException Tests", () => {
+describe("BMathException Tests", () => {
 
     // == TEST ACTIONS(S)
     // ========================================================================
@@ -37,10 +37,10 @@ describe("InvalidParamException Tests", () => {
 
     test("Constructor: Should be defined right after new instance", () => {
 
-        let error = new InvalidParamException("Ops! The cake is a lie...");
+        let error = new BMathException("Ops! The cake is a lie...");
 
         expect(error).toBeDefined();
         expect(error.message).toBe("Ops! The cake is a lie...");
-        expect(error.name).toBe("InvalidParamException");
+        expect(error.name).toBe("BMathException");
     });
 } );

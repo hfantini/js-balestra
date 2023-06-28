@@ -35,9 +35,9 @@ describe("BWorld Tests", () => {
     // == TEST CASE(S)
     // ========================================================================
 
-    test("Getter container: Should return an undefined value", () => 
+    test("Constructor #1: Should create an instance", () => 
     {
         const world = new BWorld("BlackMesa");
-        expect(world.container).not.toBeDefined();
+        expect(world).toBeDefined();
     });
 } );

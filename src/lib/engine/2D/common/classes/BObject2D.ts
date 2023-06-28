@@ -20,12 +20,12 @@
 // ============================================================================
 
 import BObject from "../../../common/classes/BObject";
-import RectTransform from "./RectTransform";
+import BRectTransform from "./BRectTransform";
 
 // == CLASSE(S)
 // ============================================================================
 
-class BObject2D extends BObject implements IUpdatable, IDrawable
+class BObject2D extends BObject implements IDrawable
 {
 	// == ATTRIBUTES
 	// ========================================================================
@@ -40,10 +40,9 @@ class BObject2D extends BObject implements IUpdatable, IDrawable
 	constructor(id:string, parent?:BObject) 
 	{
 		super(id, parent);
-		this.transform = new RectTransform(this);
+		this.transform = new BRectTransform(this);
 	}
 
-	update(): void { }
 	draw(): void { }
 
 	// == METHOD(S) & EVENT(S)

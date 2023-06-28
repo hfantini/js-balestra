@@ -24,7 +24,7 @@ import BError from "../../error/classes/BError";
 // == CLASSE(S)
 // ============================================================================
 
-class MathException extends BError
+class BMathException extends BError
 {
 	// == ATTRIBUTES
 	// ========================================================================
@@ -39,7 +39,7 @@ class MathException extends BError
 	constructor(message:string)
 	{
 		super(message);
-		this.name = "MathException";
+		this.name = "BMathException";
 	}
 
 	// == METHOD(S) & EVENT(S)
@@ -52,4 +52,4 @@ class MathException extends BError
 // == EXPORTS
 // ============================================================================
 
-export default MathException;
+export default BMathException;

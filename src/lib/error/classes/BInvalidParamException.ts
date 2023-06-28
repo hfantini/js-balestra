@@ -24,7 +24,7 @@ import BError from "./BError";
 // == CLASSE(S)
 // ============================================================================
 
-class InvalidParamException extends BError
+class BInvalidParamException extends BError
 {
 	// == ATTRIBUTES
 	// ========================================================================
@@ -39,7 +39,7 @@ class InvalidParamException extends BError
     public constructor(message: string)
     {
         super(message);
-		this.name = "InvalidParamException";
+		this.name = "BInvalidParamException";
     }
 
 	// == METHOD(S) & EVENT(S)
@@ -52,4 +52,4 @@ class InvalidParamException extends BError
 // == EXPORTS
 // ============================================================================
 
-export default InvalidParamException;
+export default BInvalidParamException;

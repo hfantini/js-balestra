@@ -19,11 +19,11 @@
 // == IMPORT(S)
 // ============================================================================
 
-import InvalidParamException from "../../error/classes/InvalidParamException";
+import BInvalidParamException from "../../error/classes/BInvalidParamException";
 import IBVector from "../interfaces/IBVector";
 import BVector2 from "./BVector2";
 import BVector4 from "./BVector4";
-import MathException from "./MathException";
+import BMathException from "./BMathException";
 
 // == CLASSE(S)
 // ============================================================================
@@ -106,7 +106,7 @@ class BVector3 implements IBVector<BVector3>
 			return new BVector3(vec.X, vec.Y, vec.Z);
 		}
 		
-		throw new InvalidParamException("The param 'vec' should be a BVector of any scale");
+		throw new BInvalidParamException("The param 'vec' should be a BVector of any scale");
 	}
 
 
@@ -190,7 +190,7 @@ class BVector3 implements IBVector<BVector3>
 		{
 			if(value == 0)
 			{
-				throw new MathException("Division by zero");
+				throw new BMathException("Division by zero");
 			}
 
 			const wVec = weight as BVector3;
@@ -205,7 +205,7 @@ class BVector3 implements IBVector<BVector3>
 
 			if(vec.X == 0 || vec.Y == 0 || vec.Z == 0)
 			{
-				throw new MathException("Division by zero");
+				throw new BMathException("Division by zero");
 			}
 
 			retValue.X = this.X / vec.X;

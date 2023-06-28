@@ -1,11 +1,11 @@
 // == IMPORT(S)
 // ============================================================================
 
-import InvalidParamException from "../../error/classes/InvalidParamException";
+import BInvalidParamException from "../../error/classes/BInvalidParamException";
 import BVector2 from "./BVector2";
 import BVector3 from "./BVector3";
 import BVector4 from "./BVector4";
-import MathException from "./MathException";
+import BMathException from "./BMathException";
 
 // == MOCK FUNCTION(S)
 // ============================================================================
@@ -79,9 +79,9 @@ describe( "BVector2 Tests", () => {
         expect(vec2.Y).toBe(vec.Y);
     });
 
-    test("Method from(): Should throw an InvalidParamException", () =>
+    test("Method from(): Should throw an BInvalidParamException", () =>
     {
-        expect( () => {BVector2.from("The cake is a lie...")} ).toThrow(InvalidParamException);
+        expect( () => {BVector2.from("The cake is a lie...")} ).toThrow(BInvalidParamException);
     });
 
     test("Method sum(): Should calculate the correct sum based in a single value", () =>
@@ -244,17 +244,17 @@ describe( "BVector2 Tests", () => {
         expect(vec2.Y).toBe(3);
     });
 
-    test("Method div(): Should throw MathException based in single value zero", () =>
+    test("Method div(): Should throw BMathException based in single value zero", () =>
     {
         const vec = new BVector2(3, 3);
-        expect(() => {vec.div(0);}).toThrow(MathException);
+        expect(() => {vec.div(0);}).toThrow(BMathException);
     });
     
-    test("Method div(): Should throw MathException based with vector with zero values", () =>
+    test("Method div(): Should throw BMathException based with vector with zero values", () =>
     {
         const vec = new BVector2(3, 3);
-        expect(() => {vec.div(new BVector2(1, 0));}).toThrow(MathException);
-        expect(() => {vec.div(new BVector2(0, 1));}).toThrow(MathException);
+        expect(() => {vec.div(new BVector2(1, 0));}).toThrow(BMathException);
+        expect(() => {vec.div(new BVector2(0, 1));}).toThrow(BMathException);
     });
 
     test("Method clone(): Should return a new instance with same values", () =>

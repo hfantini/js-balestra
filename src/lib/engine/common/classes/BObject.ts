@@ -19,20 +19,22 @@
 // == IMPORT(S)
 // ============================================================================
 
-import Transform from "../../../math/classes/Transform";
+import BTransform from "../../../math/classes/BTransform";
+import BContainer from "./BContainer";
 
 // == CLASSE(S)
 // ============================================================================
 
-class BObject
+class BObject implements IUpdatable
 {
 	// == ATTRIBUTES
 	// ========================================================================
 
 	// == VAR
     private _id:string = "";
-    private _transform:Transform = new Transform(this);
+    private _transform:BTransform = new BTransform(this);
     private _parent:BObject|undefined = undefined;
+    protected _container:BContainer = new BContainer();
 
 	// == CONST
 
@@ -76,6 +78,17 @@ class BObject
         return retValue as T;
     }
 
+    update(): void
+    {
+        if(this.container.count() > 0)
+        {
+            this._container.getAllChildren().forEach( (obj) =>
+            {
+                obj.update();
+            } );
+        }
+    }
+
 	// == GETTER(S) AND SETTER(S)
 	// ========================================================================
 
@@ -94,14 +107,19 @@ class BObject
         this._parent = value;
     }    
 
-    get transform():Transform
+    get transform():BTransform
     {
         return this._transform;
     }
     
-    set transform(value:Transform)
+    set transform(value:BTransform)
     {
         this._transform = value;
+    }
+
+    get container(): BContainer
+    {
+        return this._container;
     }
 };
 

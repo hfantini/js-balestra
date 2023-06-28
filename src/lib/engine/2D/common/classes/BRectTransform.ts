@@ -18,7 +18,7 @@
 
 import BVector2 from "../../../../math/classes/BVector2";
 import BVector3 from "../../../../math/classes/BVector3";
-import Transform from "../../../../math/classes/Transform";
+import BTransform from "../../../../math/classes/BTransform";
 import BObject from "../../../common/classes/BObject";
 
 // == IMPORT(S)
@@ -27,7 +27,7 @@ import BObject from "../../../common/classes/BObject";
 // == CLASSE(S)
 // ============================================================================
 
-class RectTransform extends Transform
+class BRectTransform extends BTransform
 {
 	// == ATTRIBUTES
 	// ========================================================================
@@ -73,4 +73,4 @@ class RectTransform extends Transform
 // == EXPORTS
 // ============================================================================
 
-export default RectTransform;
+export default BRectTransform;

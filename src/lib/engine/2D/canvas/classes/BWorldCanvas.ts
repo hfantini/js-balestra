@@ -47,20 +47,10 @@ class BWorldCanvas extends BWorld
 	// == METHOD(S) & EVENT(S)
 	// ========================================================================
 
-	update(): void
-	{
-		if(this._container && this._container instanceof BContainerWorldCanvas)
-		{
-			let currentContainer = this._container as BContainerWorldCanvas;
-			currentContainer.elementBuffer.forEach( (element) => 
-			{
-				element.update();
-			});
-		}
-	}
-
 	draw(): void
 	{
+		super.draw();
+		
 		if(this._container && this._container instanceof BContainerWorldCanvas)
 		{
 			let currentContainer = this._container as BContainerWorldCanvas;
@@ -69,7 +59,7 @@ class BWorldCanvas extends BWorld
 				element.draw();
 			});
 		}
-	}	
+	}
 
 	// == GETTER(S) AND SETTER(S)
 	// ========================================================================

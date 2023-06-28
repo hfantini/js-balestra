@@ -133,7 +133,7 @@ class BContainerWorldCanvas extends BContainer
 		};
 	}
 
-	onAddChild(evt:IContainerAddEvent)
+	private onAddChild(evt:IContainerAddEvent)
 	{
 		if(this.parent?.id === evt.world?.id && evt.object instanceof BObject2DCanvas)
 		{
@@ -141,7 +141,7 @@ class BContainerWorldCanvas extends BContainer
 		}
 	}
 
-	onRemoveChild(evt:IContainerRemoveEvent)
+	private onRemoveChild(evt:IContainerRemoveEvent)
 	{
 		if(this.parent?.id === evt.world?.id && evt.object instanceof BObject2DCanvas)
 		{

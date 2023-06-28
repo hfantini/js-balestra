@@ -19,19 +19,17 @@
 // == IMPORT(S)
 // ============================================================================
 
-import IContainer from "../interfaces/IContainer";
 import BObject from "./BObject";
 
 // == CLASSE(S)
 // ============================================================================
 
-class BWorld extends BObject implements IUpdatable, IDrawable
+class BWorld extends BObject implements IDrawable
 {
 	// == ATTRIBUTES
 	// ========================================================================
 
 	// == VAR
-	protected _container:IContainer|undefined = undefined;
 
 	// == CONST
 
@@ -46,18 +44,8 @@ class BWorld extends BObject implements IUpdatable, IDrawable
 
 	}
 
-	update(): void
-	{
-
-	}
-
 	// == GETTER(S) AND SETTER(S)
 	// ========================================================================
-
-	get container():IContainer|undefined
-	{
-		return this._container;
-	}
 };
 
 // == EXPORTS

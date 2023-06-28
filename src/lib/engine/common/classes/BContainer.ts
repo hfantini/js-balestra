@@ -16,7 +16,7 @@
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 */
 
-import InvalidParamException from "../../../error/classes/InvalidParamException";
+import BInvalidParamException from "../../../error/classes/BInvalidParamException";
 import IContainer from "../interfaces/IContainer";
 import BObject from "./BObject";
 
@@ -53,7 +53,7 @@ class BContainer implements IContainer
     {
         if(this._data.has(value.id))
         {
-            throw new InvalidParamException(`BObject with name [${value.id}] already exists.`);
+            throw new BInvalidParamException(`BObject with name [${value.id}] already exists.`);
         }
 
         value.parent = this.parent;
@@ -99,6 +99,11 @@ class BContainer implements IContainer
 
         return retValue;
     }
+
+    getAllChildren(): BObject[]
+    {
+        return Array.from(this._data.values());
+    }    
     
     count(): number
     {

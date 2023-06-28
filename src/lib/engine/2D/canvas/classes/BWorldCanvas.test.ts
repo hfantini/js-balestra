@@ -16,11 +16,12 @@
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 */
 
+import BContainerWorldCanvas from "./BContainerWorldCanvas";
+import BObject2DCanvas from "./BObject2DCanvas";
+import BWorldCanvas from "./BWorldCanvas";
+
 // == IMPORT(S)
 // ============================================================================
-
-import BObject2D from "./BObject2D";
-import BRectTransform from "./BRectTransform";
 
 // == MOCK FUNCTION(S)
 // ============================================================================
@@ -28,7 +29,7 @@ import BRectTransform from "./BRectTransform";
 // == TEST SUITE(S)
 // ============================================================================
 
-describe("BObject2D Tests", () => 
+describe("BWorldCanvas Tests", () => 
 {
 
     // == TEST ACTIONS(S)
@@ -37,17 +38,25 @@ describe("BObject2D Tests", () =>
     // == TEST CASE(S)
     // ========================================================================
 
-    test("Constructor #1: Should create a BRectTransform instance for container attr", () => 
+    test("Constructor #1: Should initialize with default parameters", () => 
     {
-		let obj = new BObject2D("PortalGun");
-        expect(obj.transform).toBeInstanceOf(BRectTransform)
+        const world = new BWorldCanvas("ApertureScience");
+
+        expect(world).toBeDefined();
+        expect(world.container).toBeInstanceOf(BContainerWorldCanvas);
     });
 
-    test("Method draw: Should be called without any errors", () =>
+    test("Method draw: Should call draw from element buffer array", () =>
     {
-        let obj = new BObject2D("PortalGun");
-        expect(() => {
-            obj.draw()
-        }).not.toThrow();
-    })
+        const obj = new BObject2DCanvas("GravityGun");
+        const world = new BWorldCanvas("HalfLifeUniverse");
+        const spyObj = jest.spyOn(obj, "draw").mockImplementationOnce(jest.fn());
+        const spyContainer = jest.spyOn(BContainerWorldCanvas.prototype, "elementBuffer", "get");
+
+        world.container.addChild(obj);
+        world.draw();
+
+        expect(spyContainer).toBeCalled();
+        expect(spyObj).toBeCalled();
+    });
 } );

@@ -17,7 +17,8 @@
 */
 
 import BVector3 from "../../../math/classes/BVector3";
-import Transform from "../../../math/classes/Transform";
+import BTransform from "../../../math/classes/BTransform";
+import BContainer from "./BContainer";
 import BEngine from "./BEngine";
 import BObject from "./BObject";
 import BWorld from "./BWorld";
@@ -46,7 +47,9 @@ describe("BObject Tests", () => {
         expect(obj).toBeDefined();
         expect(obj.id).toBe("CaveJohnson");
         expect(obj.parent).not.toBeDefined();
-        expect(obj.transform).toMatchObject(new Transform(obj));
+        expect(obj.transform).toMatchObject(new BTransform(obj));
+        expect(obj.container).toBeDefined();
+        expect(obj.container).toMatchObject(new BContainer());
     });
 
     test("Constructor #2: Should create an instance with default values with full parameters.", () => 
@@ -59,7 +62,7 @@ describe("BObject Tests", () => {
         expect(obj.id).toBe("CaveJohnson");
         expect(obj.parent).toBeDefined();
         expect(obj.parent!.id).toBe("ApertureLabs");
-        expect(obj.transform).toMatchObject(new Transform(obj));
+        expect(obj.transform).toMatchObject(new BTransform(obj));
     });    
 
     test("Method getParentByType: Should return the engine instance", () => 
@@ -82,7 +85,19 @@ describe("BObject Tests", () => {
         const engineRef = obj.getParentByType<BEngine>(BEngine);
 
         expect(engineRef).not.toBeDefined();
-    });    
+    }); 
+    
+    test("Method update: Should update all children inside container", () =>
+    {
+        const obj = new BObject("PortalGun");
+        const parent = new BObject("CaveJohnson");
+        const spy = jest.spyOn(obj, "update").mockImplementationOnce(jest.fn());
+
+        parent.container.addChild(obj);
+        parent.update();
+        
+        expect(spy).toBeCalled();
+    });
 
     test("Getter parent: Should return the right value", () => 
     {
@@ -108,14 +123,21 @@ describe("BObject Tests", () => {
         const obj = new BObject("CaveJohnson");
         obj.transform.position = obj.transform.position.sum(50);
 
-        expect(obj.transform).toMatchObject(new Transform(obj, new BVector3(50, 50, 50)));
+        expect(obj.transform).toMatchObject(new BTransform(obj, new BVector3(50, 50, 50)));
     });
 
     test("Setter transform: Should set the right value", () => 
     {
         const obj = new BObject("CaveJohnson");
-        obj.transform = new Transform(obj, new BVector3(50, 50, 50));
+        obj.transform = new BTransform(obj, new BVector3(50, 50, 50));
 
-        expect(obj.transform).toMatchObject(new Transform(obj, new BVector3(50, 50, 50)));
-    });    
+        expect(obj.transform).toMatchObject(new BTransform(obj, new BVector3(50, 50, 50)));
+    });
+    
+    test("Getter container: Should return the right value", () => 
+    {
+        const obj = new BObject("CaveJohnson");
+        expect(obj.container).toBeDefined();
+        expect(obj.container).toMatchObject(new BContainer());
+    });
 } );

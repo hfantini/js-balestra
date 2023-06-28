@@ -23,20 +23,20 @@ import BVector2 from "../../../../math/classes/BVector2";
 import BVector3 from "../../../../math/classes/BVector3";
 import BObject from "../../../common/classes/BObject";
 import BObject2D from "./BObject2D";
-import RectTransform from "./RectTransform";
+import BRectTransform from "./BRectTransform";
 
 
 // == MOCK FUNCTION(S)
 // ============================================================================
 const mockFullRectTransform = () =>
 {
-    return new RectTransform(new BObject("Cheel"), new BVector3(1), new BVector3(2), new BVector3(3), new BVector3(4), new BVector2(5));
+    return new BRectTransform(new BObject("Cheel"), new BVector3(1), new BVector3(2), new BVector3(3), new BVector3(4), new BVector2(5));
 }
 
 // == TEST SUITE(S)
 // ============================================================================
 
-describe("RectTransform Tests", () => 
+describe("BRectTransform Tests", () => 
 {
 
     // == TEST ACTIONS(S)
@@ -47,7 +47,7 @@ describe("RectTransform Tests", () =>
 
     test("Constructor #1: Empty constructor should create a default size BVector2", () => 
     {
-        const rectTransform = new RectTransform(new BObject2D('Cheel'));
+        const rectTransform = new BRectTransform(new BObject2D('Cheel'));
         expect(rectTransform.size).toBeDefined();
         expect(rectTransform.size).toMatchObject(new BVector2());
     });

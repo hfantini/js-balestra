@@ -16,7 +16,7 @@
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 */
 
-import InvalidParamException from "../../../error/classes/InvalidParamException";
+import BInvalidParamException from "../../../error/classes/BInvalidParamException";
 import BContainer from "./BContainer";
 import BObject from "./BObject";
 
@@ -86,7 +86,7 @@ describe("BContainer Tests", () => {
 
         expect(container.count()).toBe(6);
         expect(container.getChild("TestChamber20")).toBeDefined();
-    })
+    });
 
     test("Method addChild: Should throw an error when trying to add a duplicate object id", () =>
     {
@@ -95,8 +95,8 @@ describe("BContainer Tests", () => {
         expect( () =>
         {
             container.addChild( new BObject("Cheel") )
-        } ).toThrow(InvalidParamException);
-    })
+        } ).toThrow(BInvalidParamException);
+    });
     
     test("Method removeChild: Should remove a existing element by id", () =>
     {
@@ -105,7 +105,7 @@ describe("BContainer Tests", () => {
 
         expect(container.count()).toBe(4);
         expect(container.getChild("Turret")).not.toBeDefined();
-    })
+    });
 
     test("Method removeChild: Should remove a existing element from object", () =>
     {
@@ -115,7 +115,7 @@ describe("BContainer Tests", () => {
 
         expect(container.count()).toBe(4);
         expect(container.getChild("Turret")).not.toBeDefined();
-    })    
+    });   
 
     test("Method removeChildren: Should remove a existing multiple elements", () =>
     {
@@ -125,7 +125,7 @@ describe("BContainer Tests", () => {
         expect(container.count()).toBe(3);
         expect(container.getChild("Cake")).not.toBeDefined();
         expect(container.getChild("PortalGun")).not.toBeDefined();
-    })
+    });
 
     test("Method getChild: Should return the right value", () =>
     {
@@ -135,7 +135,7 @@ describe("BContainer Tests", () => {
         expect(obj).toBeDefined();
         expect(obj?.id).toBe("Cake");
         // Cake is not a lie! :)
-    })
+    });
     
     test("Method getChild: Should return the undefined for unexistent id", () =>
     {
@@ -143,7 +143,7 @@ describe("BContainer Tests", () => {
         const obj = container.getChild("GordonFreeman");
 
         expect(obj).not.toBeDefined();
-    })
+    });
     
     test("Method getChildren: Should return two existent objects", () =>
     {
@@ -154,7 +154,7 @@ describe("BContainer Tests", () => {
         expect(obj.length).toBe(2);
         expect(obj[0].id).toBe("Cheel");
         expect(obj[1].id).toBe("CompanionCube");
-    })
+    });
 
     test("Method getChildren: Should return two existent objects from three value", () =>
     {
@@ -165,7 +165,7 @@ describe("BContainer Tests", () => {
         expect(obj.length).toBe(2);
         expect(obj[0].id).toBe("Cheel");
         expect(obj[1].id).toBe("CompanionCube");
-    })
+    });
     
     test("Method getChildren: Should return an empty value", () =>
     {
@@ -174,13 +174,22 @@ describe("BContainer Tests", () => {
 
         expect(obj).toBeDefined();
         expect(obj.length).toBe(0);
-    })
+    });
+
+    test("Method getAllChildren: should return an array of BObject[]", () =>
+    {
+        const container = mockContainer();
+        const children = container.getAllChildren();
+
+        expect(children).toBeInstanceOf(Array<BObject>);
+        expect(children.length).toBeGreaterThan(0);
+    });
 
     test("Method count: Should return right object quantity", () =>
     {
         let container = mockContainer();
         expect(container.count()).toBe(5);
-    })
+    });
 
     test("Getter parent: Should return the right parent for container", () =>
     {

@@ -25,7 +25,7 @@ import BVector3 from "./BVector3";
 // == CLASSE(S)
 // ============================================================================
 
-class Transform
+class BTransform
 {
 	// == ATTRIBUTES
 	// ========================================================================
@@ -130,4 +130,4 @@ class Transform
 // == EXPORTS
 // ============================================================================
 
-export default Transform;
+export default BTransform;
