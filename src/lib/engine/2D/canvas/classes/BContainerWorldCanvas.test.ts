@@ -223,4 +223,33 @@ describe("BContainerWorldCanvas Tests", () =>
 
         expect(container.elementBuffer.length).toBe(0);
     });
+
+    test("Behavior BObject2DCanvas: ElementBuffer should be sorted after a change in Z position of object", () =>
+    {
+        const world = new BWorldCanvas("HalfLifeWorld");
+
+        const obj1 = new BObject2DCanvas("Cheel");
+        obj1.transform.position.Z = 0;
+        obj1.parent = world;
+
+        const obj2 = new BObject2DCanvas("GordonFreeman");
+        obj2.transform.position.Z = 1;
+        obj2.parent = world;
+
+        const obj3 = new BObject2DCanvas("GMAN");
+        obj3.transform.position.Z = 2;
+        obj3.parent = world;
+
+        expect(world.container.count()).toBe(3);
+        const container = world.container as BContainerWorldCanvas;
+        expect(container.elementBuffer[0]).toMatchObject(obj1);
+        expect(container.elementBuffer[1]).toMatchObject(obj2);
+        expect(container.elementBuffer[2]).toMatchObject(obj3);
+
+        obj3.transform.position.Z = -1;
+
+        expect(container.elementBuffer[0]).toMatchObject(obj3);
+        expect(container.elementBuffer[1]).toMatchObject(obj1);
+        expect(container.elementBuffer[2]).toMatchObject(obj2);       
+    });    
 } );

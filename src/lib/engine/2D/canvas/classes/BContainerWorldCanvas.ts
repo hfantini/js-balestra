@@ -24,6 +24,7 @@ import BContainer from "../../../common/classes/BContainer";
 import BWorld from "../../../common/classes/BWorld";
 import IContainerAddEvent from "../../../common/interfaces/IContainerAddEvent";
 import IContainerRemoveEvent from "../../../common/interfaces/IContainerRemoveEvent";
+import ICanvasObjectZPosChangeEvent from "../interfaces/ICanvasObjectZPosChangeEvent";
 import BObject2DCanvas from "./BObject2DCanvas";
 import BWorldCanvas from "./BWorldCanvas";
 
@@ -47,13 +48,20 @@ class BContainerWorldCanvas extends BContainer
 	{
 		super(parent);
 
-		window.addEventListener("IContainerAddChildEvent", (e) =>{
+		window.addEventListener("IContainerAddChildEvent", (e) =>
+		{
 			this.onAddChild( (e as CustomEvent).detail );
 		});
 
-		window.addEventListener("IContainerRemoveChildEvent", (e) =>{
+		window.addEventListener("IContainerRemoveChildEvent", (e) =>
+		{
 			this.onRemoveChild( (e as CustomEvent).detail );
-		});		
+		});
+
+		window.addEventListener("ICanvasObjectZPosChangeEvent", (e) =>
+		{
+			this.onCanvasObjectChangeZPos( (e as CustomEvent).detail );
+		});			
 	}
 
 	// == METHOD(S) & EVENT(S)
@@ -181,6 +189,18 @@ class BContainerWorldCanvas extends BContainer
 			if(this._elementBuffer.includes(evt.object))
 			{
 				this._elementBuffer.splice(this._elementBuffer.indexOf(evt.object), 1);
+			}
+		}
+	}
+
+	private onCanvasObjectChangeZPos(evt:ICanvasObjectZPosChangeEvent)
+	{
+		if(this.parent?.id === evt.world?.id && evt.object instanceof BObject2DCanvas)
+		{
+			if(this._elementBuffer.includes(evt.object))
+			{
+				this._elementBuffer.splice(this._elementBuffer.indexOf(evt.object), 1);
+				this.addChildToElementBuffer(evt.object);
 			}
 		}
 	}
