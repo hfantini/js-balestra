@@ -21,6 +21,7 @@
 
 import BObject from "./BObject";
 import BTime from "./BTime";
+import BUpdateGear from "./BUpdateGear";
 import BWorld from "./BWorld";
 
 // == CLASSE(S)
@@ -58,15 +59,17 @@ class BEngine extends BObject
 
 		// UPDATE & DRAW
 
-		this.update();
+		this.update( new BUpdateGear(this._time) );
 		this.draw();
     }
 
-	update() 
+	update(updateGear:BUpdateGear) 
 	{
+		super.update(updateGear);
+
 		if(this._world)
 		{
-			this._world.update();
+			this._world.update(updateGear);
 		}
 	}
 

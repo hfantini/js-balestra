@@ -20,7 +20,9 @@
 // ============================================================================
 
 import BTransform from "../../../math/classes/BTransform";
+import IUpdatable from "../interfaces/IUpdatable";
 import BContainer from "./BContainer";
+import BUpdateGear from "./BUpdateGear";
 
 // == CLASSE(S)
 // ============================================================================
@@ -83,13 +85,13 @@ class BObject implements IUpdatable
         return retValue as T;
     }
 
-    update(): void
+    update(updateGear:BUpdateGear): void
     {
         if(this.container.count() > 0)
         {
             this._container.getAllChildren().forEach( (obj) =>
             {
-                obj.update();
+                obj.update(updateGear);
             } );
         }
     }

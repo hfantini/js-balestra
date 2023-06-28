@@ -19,6 +19,7 @@
 // == IMPORT(S)
 // ============================================================================
 
+import IDrawable from "../interfaces/IDrawable";
 import BObject from "./BObject";
 
 // == CLASSE(S)

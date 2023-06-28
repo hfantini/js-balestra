@@ -19,41 +19,43 @@
 // == IMPORT(S)
 // ============================================================================
 
-import BObject from "../../../common/classes/BObject";
-import IDrawable from "../../../common/interfaces/IDrawable";
-import BRectTransform from "./BRectTransform";
+import BTime from "./BTime";
 
 // == CLASSE(S)
 // ============================================================================
 
-class BObject2D extends BObject implements IDrawable
+class BUpdateGear
 {
 	// == ATTRIBUTES
 	// ========================================================================
 
 	// == VAR
 
+    private _time: BTime;
+    
 	// == CONST
 
 	// == CONSTRUCTOR(S)
 	// ========================================================================
 
-	constructor(id:string, parent?:BObject) 
-	{
-		super(id, parent);
-		this.transform = new BRectTransform(this);
-	}
-
-	draw(): void { }
+    public constructor(time:BTime)
+    {
+        this._time = time;
+    }
 
 	// == METHOD(S) & EVENT(S)
 	// ========================================================================
 
 	// == GETTER(S) AND SETTER(S)
 	// ========================================================================
+
+    public get time():BTime
+    {
+        return this._time
+    }
 };
 
 // == EXPORTS
 // ============================================================================
 
-export default BObject2D;
+export default BUpdateGear;

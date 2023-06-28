@@ -19,6 +19,7 @@
 // == IMPORT(S)
 // ============================================================================
 
+import createBUpdateGearMock from "../mocks/BUpdateGearMock";
 import BEngine from "./BEngine";
 import BWorld from "./BWorld";
 
@@ -91,7 +92,7 @@ describe("BEngine Tests", () => {
         const engine = new BEngine("Engine", world);
         const spy = jest.spyOn(world, "update");
 
-        engine.update();
+        engine.update( createBUpdateGearMock() );
 
         expect(spy).toBeCalledTimes(1);
     })
@@ -102,7 +103,7 @@ describe("BEngine Tests", () => {
         const engine = new BEngine("Engine");
         const spy = jest.spyOn(world, "update");
 
-        engine.update();
+        engine.update( createBUpdateGearMock() );
 
         expect(spy).not.toBeCalled();
     })

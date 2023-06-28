@@ -16,15 +16,16 @@
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 */
 
+// == IMPORT(S)
+// ============================================================================
+
 import BVector3 from "../../../math/classes/BVector3";
 import BTransform from "../../../math/classes/BTransform";
 import BContainer from "./BContainer";
 import BEngine from "./BEngine";
 import BObject from "./BObject";
 import BWorld from "./BWorld";
-
-// == IMPORT(S)
-// ============================================================================
+import createBUpdateGearMock from "../mocks/BUpdateGearMock";
 
 // == MOCK FUNCTION(S)
 // ============================================================================
@@ -111,7 +112,7 @@ describe("BObject Tests", () => {
         const spy = jest.spyOn(obj, "update").mockImplementationOnce(jest.fn());
 
         parent.container.addChild(obj);
-        parent.update();
+        parent.update( createBUpdateGearMock() );
         
         expect(spy).toBeCalled();
     });
