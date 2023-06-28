@@ -32,10 +32,10 @@ class BTransform
 
 	// == VAR
     private _parent:BObject|undefined = undefined;
-    private _position:BVector3 = new BVector3();
-    private _scale:BVector3 = new BVector3(1);
-    private _rotation:BVector3 = new BVector3();
-    private _origin:BVector3 = new BVector3();
+    protected _position:BVector3 = new BVector3();
+    protected _scale:BVector3 = new BVector3(1);
+    protected _rotation:BVector3 = new BVector3();
+    protected _origin:BVector3 = new BVector3();
 
 	// == CONST
 

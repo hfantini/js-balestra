@@ -33,8 +33,8 @@ class BVector2 implements IBVector<BVector2>
 	// ========================================================================
 
 	// == VAR
-    private _X: number = 0;
-    private _Y: number = 0;
+    protected _X: number = 0;
+    protected _Y: number = 0;
 
 	// == CONSTRUCTOR(S)
 	// ========================================================================

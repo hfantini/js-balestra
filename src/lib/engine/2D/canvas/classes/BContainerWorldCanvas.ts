@@ -19,6 +19,7 @@
 // == IMPORT(S)
 // ============================================================================
 
+import BInvalidParamException from "../../../../error/classes/BInvalidParamException";
 import BContainer from "../../../common/classes/BContainer";
 import BWorld from "../../../common/classes/BWorld";
 import IContainerAddEvent from "../../../common/interfaces/IContainerAddEvent";
@@ -60,34 +61,66 @@ class BContainerWorldCanvas extends BContainer
 
 	addChild(value: BObject2DCanvas): void
 	{
-		super.addChild(value);
-		window.dispatchEvent(
-			new CustomEvent<IContainerAddEvent>('IContainerAddChildEvent', 
-				{
-					detail: 
-					{
-						world: this.parent as BWorld, 
-						object: value
-					}
-				}
-			)
-		);
+		if(value.parent === this.parent)
+		{
+			const count = this.count();
+			super.addChild(value);
+			if(this.count() == count + 1)
+			{
+				window.dispatchEvent(
+					new CustomEvent<IContainerAddEvent>('IContainerAddChildEvent', 
+						{
+							detail: 
+							{
+								world: this.parent as BWorld, 
+								object: value
+							}
+						}
+					)
+				);
+			}
+		}
+		else
+		{
+			super.addChild(value);
+		}
 	}
 
-	removeChild(value: BObject2DCanvas): void
+	removeChild(value: BObject2DCanvas|string): void
 	{
-		super.removeChild(value);
-		window.dispatchEvent(
-			new CustomEvent<IContainerRemoveEvent>('IContainerRemoveChildEvent', 
+		let id = typeof value === 'string' ? value : value.id;
+        const obj = this._data.get(id);
+
+		if(obj)
+		{
+			if(obj.parent === undefined)
+			{
+				const count = this.count();
+				super.removeChild(value);
+				if(this.count() == count - 1)
 				{
-					detail: 
-					{
-						world: this.parent as BWorld,
-						object: value
-					}
+					window.dispatchEvent(
+						new CustomEvent<IContainerRemoveEvent>('IContainerRemoveChildEvent', 
+							{
+								detail: 
+								{
+									world: this.parent as BWorld,
+									object: obj
+								}
+							}
+						)
+					);		
 				}
-			)
-		);		
+			}
+			else
+			{
+				super.removeChild(value);
+			}
+		}
+		else
+		{
+			throw new BInvalidParamException(`BObject with id [${id}] doesn't exists in this container.`);
+		}
 	}
 
 	private addChildToElementBuffer = (obj:BObject2DCanvas) =>

@@ -19,39 +19,55 @@
 // == IMPORT(S)
 // ============================================================================
 
-import BObject from "../../../common/classes/BObject";
-import BObject2D from "../../common/classes/BObject2D";
+import BVector3 from "../../../../math/classes/BVector3";
 import BRectTransformCanvas from "./BRectTransformCanvas";
 
 // == CLASSE(S)
 // ============================================================================
 
-class BObject2DCanvas extends BObject2D
+class BVector3PositionCanvas extends BVector3
 {
 	// == ATTRIBUTES
 	// ========================================================================
 
 	// == VAR
 
+	private _parent:BRectTransformCanvas|undefined = undefined;
+
 	// == CONST
 
 	// == CONSTRUCTOR(S)
 	// ========================================================================
-
-	constructor(id:string, parent?:BObject) 
-	{
-		super(id, parent);
-		this.transform = new BRectTransformCanvas(this);
-	}
 
 	// == METHOD(S) & EVENT(S)
 	// ========================================================================
 
 	// == GETTER(S) AND SETTER(S)
 	// ========================================================================
+
+	set parent(value:BRectTransformCanvas)
+	{
+		this._parent = value;
+	}
+
+	get Z():number
+	{
+		return this._Z;
+	}
+
+    set Z(value:number)
+    {
+		const oldValue = this._Z;
+		this._Z = value;
+
+        if(this._parent && value !== oldValue)
+		{
+			this._parent.dispatchEventZPosChanged();
+		}
+    }
 };
 
 // == EXPORTS
 // ============================================================================
 
-export default BObject2DCanvas;
+export default BVector3PositionCanvas;

@@ -29,24 +29,23 @@ import BObject from "./BObject";
 const mockContainer = ():BContainer =>
 {
     const parent = new BObject("ApertureScience");
-    const retValue = new BContainer(parent);
 
     const obj1 = new BObject("CompanionCube")
-    retValue.addChild(obj1)
+    parent.container.addChild(obj1)
 
     const obj2 = new BObject("Turret")
-    retValue.addChild(obj2)
+    parent.container.addChild(obj2)
 
     const obj3 = new BObject("Cake")
-    retValue.addChild(obj3)
+    parent.container.addChild(obj3)
     
     const obj4 = new BObject("PortalGun")
-    retValue.addChild(obj4)       
+    parent.container.addChild(obj4)       
 
     const obj5 = new BObject("Cheel")
-    retValue.addChild(obj5)           
+    parent.container.addChild(obj5)           
 
-    return retValue;
+    return parent.container;
 }
 
 // == TEST SUITE(S)
@@ -81,7 +80,7 @@ describe("BContainer Tests", () => {
 
     test("Method addChild: Should add new object in the container data", () =>
     {
-        let container = mockContainer();
+        const container = mockContainer();
         container.addChild( new BObject("TestChamber20") )
 
         expect(container.count()).toBe(6);
@@ -90,13 +89,30 @@ describe("BContainer Tests", () => {
 
     test("Method addChild: Should throw an error when trying to add a duplicate object id", () =>
     {
-        let container = mockContainer();
+        const container = mockContainer();
         
         expect( () =>
         {
             container.addChild( new BObject("Cheel") )
         } ).toThrow(BInvalidParamException);
     });
+
+    test("Method addChild: Should remove the old parent from element and add a new one", () =>
+    {
+        const parent1 = new BObject("ApertureLabs");
+        const parent2 = new BObject("City17");
+
+        const obj = new BObject("Cake", parent1);
+        expect(obj.parent).toMatchObject(parent1);
+        expect(parent1.container.count()).toBe(1);
+        expect(parent2.container.count()).toBe(0);
+
+        parent2.container.addChild(obj);
+
+        expect(obj.parent).toMatchObject(parent2);
+        expect(parent1.container.count()).toBe(0);
+        expect(parent2.container.count()).toBe(1);
+    });    
     
     test("Method removeChild: Should remove a existing element by id", () =>
     {
@@ -109,17 +125,40 @@ describe("BContainer Tests", () => {
 
     test("Method removeChild: Should remove a existing element from object", () =>
     {
-        let container = mockContainer();
+        const container = mockContainer();
         const obj = new BObject("Turret");
         container.removeChild(obj);
 
         expect(container.count()).toBe(4);
         expect(container.getChild("Turret")).not.toBeDefined();
-    });   
+    });
+
+    test("Method removeChild: Should throw exception when try to remove an unexistent object", () =>
+    {
+        const container = mockContainer();
+        const obj = new BObject("GravityGun");
+
+        expect(() => container.removeChild(obj)).toThrowError(BInvalidParamException);
+    });
+
+    test("Method removeChild: Should remove element and unset parent from it", () =>
+    {
+        const container = mockContainer();
+        const obj = new BObject("GravityGun");
+
+        container.addChild(obj);
+        expect(container.getChild("GravityGun")).toBeDefined();
+        expect(obj.parent).toBeDefined();
+
+        container.removeChild(obj);
+
+        expect(container.getChild("GravityGun")).not.toBeDefined();
+        expect(obj.parent).not.toBeDefined();
+    });    
 
     test("Method removeChildren: Should remove a existing multiple elements", () =>
     {
-        let container = mockContainer();
+        const container = mockContainer();
         container.removeChildren(["Cake", "PortalGun"]);
 
         expect(container.count()).toBe(3);
@@ -129,7 +168,7 @@ describe("BContainer Tests", () => {
 
     test("Method getChild: Should return the right value", () =>
     {
-        let container = mockContainer();
+        const container = mockContainer();
         const obj = container.getChild("Cake");
 
         expect(obj).toBeDefined();
@@ -139,7 +178,7 @@ describe("BContainer Tests", () => {
     
     test("Method getChild: Should return the undefined for unexistent id", () =>
     {
-        let container = mockContainer();
+        const container = mockContainer();
         const obj = container.getChild("GordonFreeman");
 
         expect(obj).not.toBeDefined();
@@ -147,7 +186,7 @@ describe("BContainer Tests", () => {
     
     test("Method getChildren: Should return two existent objects", () =>
     {
-        let container = mockContainer();
+        const container = mockContainer();
         const obj = container.getChildren(["Cheel", "CompanionCube"]);
 
         expect(obj).toBeDefined();
@@ -158,7 +197,7 @@ describe("BContainer Tests", () => {
 
     test("Method getChildren: Should return two existent objects from three value", () =>
     {
-        let container = mockContainer();
+        const container = mockContainer();
         const obj = container.getChildren(["Cheel", "CompanionCube", "GordonFreeman"]);
 
         expect(obj).toBeDefined();
@@ -169,7 +208,7 @@ describe("BContainer Tests", () => {
     
     test("Method getChildren: Should return an empty value", () =>
     {
-        let container = mockContainer();
+        const container = mockContainer();
         const obj = container.getChildren(["GordonFreeman"]);
 
         expect(obj).toBeDefined();
@@ -187,13 +226,13 @@ describe("BContainer Tests", () => {
 
     test("Method count: Should return right object quantity", () =>
     {
-        let container = mockContainer();
+        const container = mockContainer();
         expect(container.count()).toBe(5);
     });
 
     test("Getter parent: Should return the right parent for container", () =>
     {
-        let container = mockContainer();
+        const container = mockContainer();
         expect(container.parent?.id).toBe("ApertureScience");
     });
 } );

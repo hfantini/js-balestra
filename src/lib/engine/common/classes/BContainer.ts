@@ -34,7 +34,7 @@ class BContainer implements IContainer
 	// == VAR
 
     private _parent:BObject|undefined = undefined;
-    private _data:Map<string, BObject> = new Map<string, BObject>();
+    protected _data:Map<string, BObject> = new Map<string, BObject>();
 
 	// == CONST
 
@@ -53,11 +53,17 @@ class BContainer implements IContainer
     {
         if(this._data.has(value.id))
         {
-            throw new BInvalidParamException(`BObject with name [${value.id}] already exists.`);
+            throw new BInvalidParamException(`BObject with name [${value.id}] already exists in this container.`);
         }
 
-        value.parent = this.parent;
-        this._data.set(value.id, value);
+        if(value.parent === this.parent)
+        {
+            this._data.set(value.id, value);
+        }
+        else
+        {
+            value.parent = this.parent;
+        }
     }
 
     removeChild(value: string | BObject): void
@@ -67,8 +73,18 @@ class BContainer implements IContainer
 
         if(obj)
         {
-            obj.parent = undefined;
-            this._data.delete(id);
+            if(obj.parent === undefined && this._data.has(obj.id))
+            {
+                this._data.delete(id);
+            }
+            else if(obj.parent === this.parent)
+            {
+                obj.parent = undefined;
+            }
+        }
+        else
+        {
+            throw new BInvalidParamException(`BObject with id [${id}] doesn't exists in this container.`);
         }
     }
 

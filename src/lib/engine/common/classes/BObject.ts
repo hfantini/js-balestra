@@ -34,7 +34,7 @@ class BObject implements IUpdatable
     private _id:string = "";
     private _transform:BTransform = new BTransform(this);
     private _parent:BObject|undefined = undefined;
-    protected _container:BContainer = new BContainer();
+    protected _container:BContainer = new BContainer(this);
 
 	// == CONST
 
@@ -44,7 +44,7 @@ class BObject implements IUpdatable
     constructor(id:string, parent?:BObject) 
     {
         this._id = id;
-        this._parent = parent;
+        this.parent = parent;
     }
 
 	// == METHOD(S) & EVENT(S)
@@ -54,7 +54,12 @@ class BObject implements IUpdatable
     {
         let retValue:any = undefined;
 
-        if(this._parent)
+        if(this instanceof type)
+        {
+            retValue = this;
+        }
+
+        if(!retValue  && this._parent)
         {
             let lastParent = this.parent;
 
@@ -104,7 +109,25 @@ class BObject implements IUpdatable
 
     set parent(value:BObject|undefined)
     {
-        this._parent = value;
+        if(value)
+        {
+            if(this.parent)
+            {
+                this.parent.container.removeChild(this);
+            }
+
+            this._parent = value;
+            this._parent?.container.addChild(this);
+        }
+        else
+        {
+            if(this._parent)
+            {
+                const container = this._parent.container;
+                this._parent = undefined;
+                container.removeChild(this);
+            }
+        }
     }    
 
     get transform():BTransform

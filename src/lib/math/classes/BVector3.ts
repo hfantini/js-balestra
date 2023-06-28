@@ -34,9 +34,9 @@ class BVector3 implements IBVector<BVector3>
 	// ========================================================================
 
 	// == VAR
-    private _X: number = 0;
-    private _Y: number = 0;
-	private _Z: number = 0;
+    protected _X: number = 0;
+    protected _Y: number = 0;
+	protected _Z: number = 0;
 
 	// == CONST
 

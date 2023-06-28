@@ -19,6 +19,7 @@
 // == IMPORT(S)
 // ============================================================================
 
+import BInvalidParamException from "../../../../error/classes/BInvalidParamException";
 import BObject from "../../../common/classes/BObject";
 import BWorld from "../../../common/classes/BWorld";
 import IContainerAddEvent from "../../../common/interfaces/IContainerAddEvent";
@@ -77,23 +78,38 @@ describe("BContainerWorldCanvas Tests", () =>
 
     test("Method addChild: Should dispatch an event of type IContainerAddChildEvent", () => 
     {
-        const spy = jest.spyOn(window, "dispatchEvent").mockImplementationOnce(jest.fn());
+        const spyAddChild = jest.spyOn(window, "dispatchEvent").mockImplementationOnce(jest.fn());
         const world = new BWorldCanvas("ApertureLabs");
         const obj = new BObject2DCanvas("PortalGun");
 
         world.container?.addChild(obj);
-        expect(spy).toBeCalledWith(mockAddEvent(obj, world));
+        expect(spyAddChild).toBeCalledWith(mockAddEvent(obj, world));
     });
     
     test("Method removeChild: Should dispatch an event of type IContainerRemoveChildEvent", () => 
     {
-        const spy = jest.spyOn(window, "dispatchEvent").mockImplementationOnce(jest.fn());
+        const spyRemoveChild = jest.spyOn(window, "dispatchEvent").mockImplementationOnce(jest.fn());
+        const world = new BWorldCanvas("ApertureLabs");
+        const obj = new BObject2DCanvas("PortalGun", world);
+        
+        world.container?.removeChild(obj);
+        expect(spyRemoveChild).toBeCalledWith(mockRemoveEvent(obj, world));
+    });
+
+    test("Method removeChild: Should throw BInvalidParamException when tries to remove an unexistent child from object", () => 
+    {
         const world = new BWorldCanvas("ApertureLabs");
         const obj = new BObject2DCanvas("PortalGun");
         
-        world.container?.removeChild(obj);
-        expect(spy).toBeCalledWith(mockRemoveEvent(obj, world));
+        expect( () => world.container?.removeChild(obj) ).toThrowError(BInvalidParamException);
     });
+    
+    test("Method removeChild: Should throw BInvalidParamException when tries to remove an unexistent child from string", () => 
+    {
+        const world = new BWorldCanvas("ApertureLabs");
+        
+        expect( () => world.container?.removeChild("PortalGun") ).toThrowError(BInvalidParamException);
+    });    
 
     test("Method onAddChild: Should add child in the right place in ElementBuffer", () =>
     {

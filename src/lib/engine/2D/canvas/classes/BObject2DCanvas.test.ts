@@ -20,6 +20,7 @@
 // ============================================================================
 
 import BObject2DCanvas from "./BObject2DCanvas";
+import BRectTransformCanvas from "./BRectTransformCanvas";
 
 
 // == MOCK FUNCTION(S)
@@ -41,4 +42,10 @@ describe("BObject2DCanvas Tests", () =>
     	const value = new BObject2DCanvas("PortalGun");
         expect(value).toBeDefined();
     });
+
+    test("Constructor #1: Should define transform as a BRectTransformCanvas", () => 
+    {
+    	const value = new BObject2DCanvas("PortalGun");
+        expect(value.transform).toBeInstanceOf(BRectTransformCanvas);
+    });    
 } );
