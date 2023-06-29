@@ -1,11 +1,11 @@
 // == IMPORT(S)
 // ============================================================================
 
+import { BMathException } from "../..";
 import BInvalidParamException from "../../error/classes/BInvalidParamException";
 import BVector2 from "./BVector2";
 import BVector3 from "./BVector3";
 import BVector4 from "./BVector4";
-import BMathException from "./BMathException";
 
 // == MOCK FUNCTION(S)
 // ============================================================================

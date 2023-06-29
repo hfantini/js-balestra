@@ -20,10 +20,10 @@
 // ============================================================================
 
 import BInvalidParamException from "../../error/classes/BInvalidParamException";
+import BMathException from "../../error/classes/BMathException";
 import IBVector from "../interfaces/IBVector";
 import BVector3 from "./BVector3";
 import BVector4 from "./BVector4";
-import BMathException from "./BMathException";
 
 // == CLASSE(S)
 // ============================================================================

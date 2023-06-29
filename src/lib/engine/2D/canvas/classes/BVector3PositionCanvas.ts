@@ -45,6 +45,11 @@ class BVector3PositionCanvas extends BVector3
 	// == GETTER(S) AND SETTER(S)
 	// ========================================================================
 
+	get parent():BRectTransformCanvas|undefined
+	{
+		return this._parent;
+	}
+
 	set parent(value:BRectTransformCanvas)
 	{
 		this._parent = value;
