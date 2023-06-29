@@ -10,13 +10,14 @@ export default defineConfig(
             insertTypesEntry: true,
         }),
     ],
-    build: {
+    build: 
+    {
         lib: 
         {
             entry: path.resolve(__dirname, 'src/lib/index.ts'),
-            name: 'MyLib',
+            name: 'balestra',
             formats: ['es', 'umd'],
-            fileName: (format) => `my-lib.${format}.js`,
+            fileName: (format) => `balestra.${format}.js`,
         }
     },
 });
