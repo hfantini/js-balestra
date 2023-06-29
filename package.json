@@ -2,7 +2,7 @@
   "name": "balestra",
   "private": false,
   "description": "Simple graphical engine designed for web",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "type": "module",
   "license": "MIT",
   "keywords": [
@@ -39,8 +39,10 @@
   "types": "./dist/index.d.ts",
   "exports": {
       ".": {
+          "types": "./dist/index.d.ts",
           "import": "./dist/balestra.es.js",
           "require": "./dist/balestra.umd.js"
-      }
+      },
+      "./package.json": "./package.json"
   }  
 }
