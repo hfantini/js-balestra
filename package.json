@@ -2,22 +2,26 @@
   "name": "balestra",
   "private": false,
   "description": "Simple graphical engine designed for web",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "type": "module",
   "license": "MIT",
-  "keywords": [
+  "keywords": 
+  [
     "Graphics", "Canvas", "Engine"
   ],
-  "repository": {
+  "repository": 
+  {
     "type": "git",
     "url": "https://github.com/hfantini/js-balestra"
   },
-  "scripts": {
+  "scripts": 
+  {
     "build": "tsc && vite build",
     "test": "jest",
     "test:coverage": "jest --coverage --collectCoverageFrom=src/lib/**/*.{js,jsx,ts,tsx}"
   },
-  "devDependencies": {
+  "devDependencies": 
+  {
     "@babel/preset-typescript": "^7.22.5",
     "@types/jest": "^29.5.2",
     "canvas": "^2.11.2",
@@ -30,19 +34,22 @@
     "vite": "^4.3.9",
     "vite-plugin-dts": "^3.0.0-beta.3"
   },
-  "files": [
+  "files": 
+  [
     "dist",
     "README.MD"
   ],
   "main": "./dist/balestra.umd.js",
   "module": "./dist/balestra.es.js",
   "types": "./dist/index.d.ts",
-  "exports": {
-      ".": {
-          "types": "./dist/index.d.ts",
-          "import": "./dist/balestra.es.js",
-          "require": "./dist/balestra.umd.js"
-      },
-      "./package.json": "./package.json"
+  "exports": 
+  {
+    ".": 
+    {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/balestra.es.js",
+        "require": "./dist/balestra.umd.js"
+    },
+    "./package.json": "./package.json"
   }  
 }
