@@ -19,8 +19,10 @@
 // == IMPORT(S)
 // ============================================================================
 
+import BRenderGear from "../../../graphics/common/classes/BRenderGear";
 import createBUpdateGearMock from "../mocks/BUpdateGearMock";
 import BEngine from "./BEngine";
+import BUpdateGear from "./BUpdateGear";
 import BWorld from "./BWorld";
 
 // == MOCK FUNCTION(S)
@@ -97,6 +99,18 @@ describe("BEngine Tests", () => {
 
         expect(spy).toBeCalledTimes(1);
     })
+
+    test("Method createUpdateGear: Should return a valid instance of BUpdateGear", () =>
+    {
+        const engine = new BEngine("GoldSrc");
+        expect(engine.createUpdateGear()).toBeInstanceOf(BUpdateGear);
+    });
+
+    test("Method createRenderGear: Should return a valid instance of BRenderGear", () =>
+    {
+        const engine = new BEngine("GoldSrc");
+        expect(engine.createRenderGear()).toBeInstanceOf(BRenderGear);
+    });    
     
     test("Method update: should world.update not be called if an world is not defined", () => 
     {

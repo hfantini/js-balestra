@@ -170,8 +170,8 @@ describe("BObject Tests", () => {
         expect(obj.parent).toBeDefined();
         expect(parent1.container.count()).toBe(0);
         expect(parent2.container.count()).toBe(1);
-    });    
-
+    });
+    
     test("Getter transform: Should return the right value", () => 
     {
         const obj = new BObject("CaveJohnson");

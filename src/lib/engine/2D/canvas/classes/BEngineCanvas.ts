@@ -19,6 +19,7 @@
 // == IMPORT(S)
 // ============================================================================
 
+import { BRenderGearCanvas } from "../../../..";
 import BError from "../../../../error/classes/BError";
 import BEngine from "../../../common/classes/BEngine";
 import BWorld from "../../../common/classes/BWorld";
@@ -55,6 +56,14 @@ class BEngineCanvas extends BEngine
 
         this._context = context;
 	}
+
+	// == METHOD(S) & EVENT(S)
+	// ========================================================================
+
+	createRenderGear():BRenderGearCanvas
+	{
+		return new BRenderGearCanvas(this._canvas, this._context);
+	};
 
 	// == GETTER(S) AND SETTER(S)
 	// ========================================================================
