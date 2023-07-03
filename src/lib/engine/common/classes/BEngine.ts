@@ -51,6 +51,16 @@ class BEngine extends BObject
 	// == METHOD(S) & EVENT(S)
 	// ========================================================================
 
+	createUpdateGear():BUpdateGear
+	{
+		return new BUpdateGear(this._time);
+	};
+
+	createRenderGear():BRenderGear
+	{
+		return new BRenderGear();
+	};	
+
     tick(lastFrameTime:number)
     {
 		// UPDATE TIME
@@ -60,11 +70,11 @@ class BEngine extends BObject
 
 		// UPDATE & DRAW
 
-		this.update( new BUpdateGear(this._time) );
+		this.update( this.createUpdateGear() );
 
 		if(this._world)
 		{
-			this._world.draw(new BRenderGear());
+			this._world.draw( this.createRenderGear() );
 		}
     }
 

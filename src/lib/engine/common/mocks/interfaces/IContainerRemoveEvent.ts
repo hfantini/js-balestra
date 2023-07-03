@@ -19,19 +19,19 @@
 // == IMPORT(S)
 // ============================================================================
 
-import BObject from "../classes/BObject";
-import BWorld from "../classes/BWorld";
+import BObject from "../../classes/BObject";
+import BWorld from "../../classes/BWorld";
 
 // == INTERFACE(S)
 // ============================================================================
 
-interface IContainerAddEvent
+interface IContainerRemoveEvent
 {
 	world?: BWorld;
-	object: BObject
+	object: BObject;
 };
 
 // == EXPORTS
 // ============================================================================
 
-export default IContainerAddEvent;
+export default IContainerRemoveEvent;

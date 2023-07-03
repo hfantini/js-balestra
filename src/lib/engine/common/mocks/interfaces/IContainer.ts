@@ -16,7 +16,7 @@
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 */
 
-import BUpdateGear from "../classes/BUpdateGear";
+import BObject from "../../classes/BObject";
 
 // == IMPORT(S)
 // ============================================================================
@@ -24,16 +24,21 @@ import BUpdateGear from "../classes/BUpdateGear";
 // == INTERFACE(S)
 // ============================================================================
 
-interface IUpdatable
+interface IContainer
 {
 	// == METHOD(S) & EVENT(S)
 	// ========================================================================
 
-	update(updateGear:BUpdateGear):void;
+    addChild(value:BObject):void;
+    removeChild(value:string|BObject):void;
+    removeChildren(values:string[]|BObject[]):void;
+    getChild(id:string):BObject|undefined;
+    getChildren(id:string[]):BObject[];
+	getAllChildren():BObject[];
+	count():number;
 };
 
 // == EXPORTS
 // ============================================================================
 
-export default IUpdatable;
-
+export default IContainer;

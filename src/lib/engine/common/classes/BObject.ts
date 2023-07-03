@@ -20,7 +20,7 @@
 // ============================================================================
 
 import BTransform from "../../../math/classes/BTransform";
-import IUpdatable from "../interfaces/IUpdatable";
+import IUpdatable from "../mocks/interfaces/IUpdatable";
 import BContainer from "./BContainer";
 import BUpdateGear from "./BUpdateGear";
 

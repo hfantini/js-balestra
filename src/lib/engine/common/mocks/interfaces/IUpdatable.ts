@@ -16,22 +16,24 @@
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 */
 
+import BUpdateGear from "../../classes/BUpdateGear";
+
 // == IMPORT(S)
 // ============================================================================
-
-import BObject from "../classes/BObject";
-import BWorld from "../classes/BWorld";
 
 // == INTERFACE(S)
 // ============================================================================
 
-interface IContainerRemoveEvent
+interface IUpdatable
 {
-	world?: BWorld;
-	object: BObject;
+	// == METHOD(S) & EVENT(S)
+	// ========================================================================
+
+	update(updateGear:BUpdateGear):void;
 };
 
 // == EXPORTS
 // ============================================================================
 
-export default IContainerRemoveEvent;
+export default IUpdatable;
+

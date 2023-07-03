@@ -17,7 +17,7 @@
 */
 
 import BInvalidParamException from "../../../error/classes/BInvalidParamException";
-import IContainer from "../interfaces/IContainer";
+import IContainer from "../mocks/interfaces/IContainer";
 import BObject from "./BObject";
 
 // == IMPORT(S)

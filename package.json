@@ -2,7 +2,7 @@
   "name": "balestra",
   "private": false,
   "description": "Simple graphical engine designed for web",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "type": "module",
   "license": "MIT",
   "keywords": 
