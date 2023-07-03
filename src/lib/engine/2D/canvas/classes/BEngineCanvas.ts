@@ -19,7 +19,7 @@
 // == IMPORT(S)
 // ============================================================================
 
-import { BRenderGearCanvas } from "../../../..";
+import { BRenderGear, BRenderGearCanvas } from "../../../..";
 import BError from "../../../../error/classes/BError";
 import BEngine from "../../../common/classes/BEngine";
 import BWorld from "../../../common/classes/BWorld";
@@ -60,7 +60,7 @@ class BEngineCanvas extends BEngine
 	// == METHOD(S) & EVENT(S)
 	// ========================================================================
 
-	createRenderGear():BRenderGearCanvas
+	createRenderGear():BRenderGear
 	{
 		return new BRenderGearCanvas(this._canvas, this._context);
 	};

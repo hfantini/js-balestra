@@ -56,6 +56,10 @@ describe("BEngineCanvas Tests", () =>
     test("Method createRenderGear: Should return a valid instance of BRenderGearCanvas", () =>
     {
         const engine = new BEngineCanvas("Source2", createHTMLCanvasElementMock());
-        expect(engine.createRenderGear()).toBeInstanceOf(BRenderGearCanvas);
+        const rGear = engine.createRenderGear() as BRenderGearCanvas;
+
+        expect(rGear).toBeInstanceOf(BRenderGearCanvas);
+        expect(rGear.canvas).toBeDefined();
+        expect(rGear.context).toBeDefined();
     });
 } );
