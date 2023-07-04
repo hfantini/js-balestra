@@ -19,6 +19,7 @@
 // == IMPORT(S)
 // ============================================================================
 
+import BScreen from "./BScreen";
 import BTime from "./BTime";
 
 // == CLASSE(S)
@@ -32,15 +33,19 @@ class BUpdateGear
 	// == VAR
 
     private _time: BTime;
+	private _screen: BScreen;
+	private _extra?: any;
     
 	// == CONST
 
 	// == CONSTRUCTOR(S)
 	// ========================================================================
 
-    public constructor(time:BTime)
+    public constructor(time:BTime, screen:BScreen, extra?: any)
     {
         this._time = time;
+		this._screen = screen;
+		this._extra = extra;
     }
 
 	// == METHOD(S) & EVENT(S)
@@ -53,6 +58,16 @@ class BUpdateGear
     {
         return this._time
     }
+
+	public get screen():BScreen
+	{
+		return this._screen;
+	}
+
+	public get extra():any|undefined
+	{
+		return this._extra;
+	}
 };
 
 // == EXPORTS

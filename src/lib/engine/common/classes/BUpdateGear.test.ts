@@ -19,6 +19,7 @@
 // == IMPORT(S)
 // ============================================================================
 
+import createBScreenMock from "../mocks/BScreenMock";
 import BTime from "./BTime";
 import BUpdateGear from "./BUpdateGear";
 
@@ -40,9 +41,13 @@ describe("BUpdateGear Tests", () =>
     test("Constructor #1: Should build an instance with default values", () => 
     {
         const time = new BTime();
-        const updateGear = new BUpdateGear(time);
+        const screen = createBScreenMock();
+        const extra = {city: 17};
+        const updateGear = new BUpdateGear(time, screen, extra);
 
         expect(updateGear).toBeDefined();
         expect(updateGear.time).toMatchObject(time);
+        expect(updateGear.screen).toMatchObject(screen);
+        expect(updateGear.extra).toMatchObject(extra);
     });
 } );

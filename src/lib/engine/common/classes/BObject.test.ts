@@ -26,6 +26,8 @@ import BEngine from "./BEngine";
 import BObject from "./BObject";
 import BWorld from "./BWorld";
 import createBUpdateGearMock from "../mocks/BUpdateGearMock";
+import createDomContainerMock from "../mocks/BEngineMock";
+import createHTMLCanvasElementMock from "../../../graphics/2D/canvas/mocks/HTMLCanvasElementMock";
 
 // == MOCK FUNCTION(S)
 // ============================================================================
@@ -76,7 +78,7 @@ describe("BObject Tests", () => {
 
     test("Method getParentByType: Should return itself", () => 
     {
-        const engine = new BEngine('Engine');
+        const engine = new BEngine('Engine', createDomContainerMock(), createHTMLCanvasElementMock());
         const engineRef = engine.getParentByType<BEngine>(BEngine);
 
         expect(engineRef).toBeDefined();
@@ -85,7 +87,7 @@ describe("BObject Tests", () => {
 
     test("Method getParentByType: Should return the engine instance", () => 
     {
-        const engine = new BEngine('Engine');
+        const engine = new BEngine('Engine', createDomContainerMock(), createHTMLCanvasElementMock());
         const world = new BWorld('ApertureLabs', engine);
         const obj = new BObject("CaveJohnson", world);
 

@@ -19,7 +19,9 @@
 // == IMPORT(S)
 // ============================================================================
 
+import createHTMLCanvasElementMock from "../../../graphics/2D/canvas/mocks/HTMLCanvasElementMock";
 import BRenderGear from "../../../graphics/common/classes/BRenderGear";
+import createDomContainerMock from "../mocks/BEngineMock";
 import createBUpdateGearMock from "../mocks/BUpdateGearMock";
 import BEngine from "./BEngine";
 import BUpdateGear from "./BUpdateGear";
@@ -41,7 +43,7 @@ describe("BEngine Tests", () => {
 
     test("Constructor #1: Should create instance with default values with half parameters", () => 
     {
-        const engine = new BEngine("Engine");
+        const engine = new BEngine("Engine", createDomContainerMock(), createHTMLCanvasElementMock());
         expect(engine).toBeDefined();
         expect(engine.time).toBeDefined();
         expect(engine.id).toBe("Engine");
@@ -52,14 +54,14 @@ describe("BEngine Tests", () => {
     test("Constructor #2: Should create instance with default values with full parameters", () => 
     {
         const world = new BWorld("ApertureLabs");
-        const engine = new BEngine("Engine", world);
+        const engine = new BEngine("Engine", createDomContainerMock(), createHTMLCanvasElementMock(), world);
 
         expect(engine.world).toBeDefined();
     });
 
     test("Method tick: should update the time", () => 
     {
-        const engine = new BEngine("Engine");
+        const engine = new BEngine("Engine", createDomContainerMock(), createHTMLCanvasElementMock());
         const spy = jest.spyOn(engine.time, "update");
 
         engine.tick(1000);
@@ -70,7 +72,7 @@ describe("BEngine Tests", () => {
 
     test("Method tick: should call update method", () => 
     {
-        const engine = new BEngine("Engine");
+        const engine = new BEngine("Engine", createDomContainerMock(), createHTMLCanvasElementMock());
         const spy = jest.spyOn(engine, "update");
 
         engine.tick(1000);
@@ -81,7 +83,7 @@ describe("BEngine Tests", () => {
     test("Method tick: should call world draw method", () => 
     {
         const world = new BWorld("City17")
-        const engine = new BEngine("Engine", world);
+        const engine = new BEngine("Engine", createDomContainerMock(), createHTMLCanvasElementMock(), world);
         const spy = jest.spyOn(world, "draw");
 
         engine.tick(1000);
@@ -92,7 +94,7 @@ describe("BEngine Tests", () => {
     test("Method update: should world.update be called if an world is defined", () => 
     {
         const world = new BWorld("BlackMesa");
-        const engine = new BEngine("Engine", world);
+        const engine = new BEngine("Engine", createDomContainerMock(), createHTMLCanvasElementMock(), world);
         const spy = jest.spyOn(world, "update");
 
         engine.update( createBUpdateGearMock() );
@@ -102,20 +104,20 @@ describe("BEngine Tests", () => {
 
     test("Method createUpdateGear: Should return a valid instance of BUpdateGear", () =>
     {
-        const engine = new BEngine("GoldSrc");
+        const engine = new BEngine("GoldSrc", createDomContainerMock(), createHTMLCanvasElementMock());
         expect(engine.createUpdateGear()).toBeInstanceOf(BUpdateGear);
     });
 
     test("Method createRenderGear: Should return a valid instance of BRenderGear", () =>
     {
-        const engine = new BEngine("GoldSrc");
+        const engine = new BEngine("GoldSrc", createDomContainerMock(), createHTMLCanvasElementMock());
         expect(engine.createRenderGear()).toBeInstanceOf(BRenderGear);
     });    
     
     test("Method update: should world.update not be called if an world is not defined", () => 
     {
         const world = new BWorld("BlackMesa");
-        const engine = new BEngine("Engine");
+        const engine = new BEngine("Engine", createDomContainerMock(), createHTMLCanvasElementMock());
         const spy = jest.spyOn(world, "update");
 
         engine.update( createBUpdateGearMock() );
@@ -126,7 +128,7 @@ describe("BEngine Tests", () => {
     test("Method draw: should world.draw be called if an world is defined", () => 
     {
         const world = new BWorld("BlackMesa");
-        const engine = new BEngine("Engine", world);
+        const engine = new BEngine("Engine", createDomContainerMock(), createHTMLCanvasElementMock(), world);
         const spy = jest.spyOn(world, "draw");
 
         engine.tick(1000);
@@ -137,7 +139,7 @@ describe("BEngine Tests", () => {
     test("Method draw: should world.draw not be called if an world is not defined", () => 
     {
         const world = new BWorld("BlackMesa");
-        const engine = new BEngine("Engine");
+        const engine = new BEngine("Engine", createDomContainerMock(), createHTMLCanvasElementMock());
         const spy = jest.spyOn(world, "draw");
 
         engine.tick(1000);
@@ -148,7 +150,7 @@ describe("BEngine Tests", () => {
     test("Setter world: Should set the right value", () =>
     {
         const world = new BWorld("ApertureLabs");
-        const engine = new BEngine("Engine");
+        const engine = new BEngine("Engine", createDomContainerMock(), createHTMLCanvasElementMock());
 
         engine.world = world;
 
@@ -159,7 +161,7 @@ describe("BEngine Tests", () => {
     test("Setter world: Engine should be set as parent of world", () =>
     {
         const world = new BWorld("ApertureLabs");
-        const engine = new BEngine("Engine");
+        const engine = new BEngine("Engine", createDomContainerMock(), createHTMLCanvasElementMock());
 
         engine.world = world;
 
@@ -170,7 +172,7 @@ describe("BEngine Tests", () => {
     test("Setter world: Should unset correctly", () =>
     {
         const world = new BWorld("ApertureLabs");
-        const engine = new BEngine("Engine", world);
+        const engine = new BEngine("Engine", createDomContainerMock(), createHTMLCanvasElementMock(), world);
 
         expect(engine.world).toBeDefined();
         engine.world = undefined;

@@ -21,6 +21,7 @@
 
 import BRenderGear from "../../../graphics/common/classes/BRenderGear";
 import BObject from "./BObject";
+import BScreen from "./BScreen";
 import BTime from "./BTime";
 import BUpdateGear from "./BUpdateGear";
 import BWorld from "./BWorld";
@@ -34,18 +35,23 @@ class BEngine extends BObject
 	// ========================================================================
 
 	// == VAR
-	private _world:BWorld|undefined = undefined;
-	private _time:BTime = new BTime();
+	protected _world:BWorld|undefined = undefined;
+	protected _time:BTime = new BTime();
+	protected _canvas:HTMLCanvasElement;
+	protected _domContainer:HTMLDivElement;
+	protected _extra:any;
 
 	// == CONST
 
 	// == CONSTRUCTOR(S)
 	// ========================================================================
 
-	constructor(id:string, world?:BWorld)
+	constructor(id:string, container:HTMLDivElement, canvas:HTMLCanvasElement, world?:BWorld)
 	{
 		super(id);
 		this._world = world;
+		this._canvas = canvas;
+		this._domContainer = container;
 	}
 
 	// == METHOD(S) & EVENT(S)
@@ -53,7 +59,11 @@ class BEngine extends BObject
 
 	createUpdateGear():BUpdateGear
 	{
-		return new BUpdateGear(this._time);
+		return new BUpdateGear(
+			this._time, 
+			new BScreen(this._domContainer), 
+			this._extra
+		);
 	};
 
 	createRenderGear():BRenderGear
@@ -61,8 +71,10 @@ class BEngine extends BObject
 		return new BRenderGear();
 	};	
 
-    tick(lastFrameTime:number)
+    tick(lastFrameTime:number, extra?: any)
     {
+		this._extra = extra;
+
 		// UPDATE TIME
 		this._time.update(lastFrameTime);
 
@@ -109,7 +121,12 @@ class BEngine extends BObject
 		{
 			this._world.parent = this;
 		}
-	}	
+	}
+
+	get canvas():HTMLCanvasElement
+	{
+		return this._canvas;
+	}
 };
 
 // == EXPORTS

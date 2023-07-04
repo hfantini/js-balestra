@@ -19,8 +19,9 @@
 // == IMPORT(S)
 // ============================================================================
 
-import { BRenderGear, BRenderGearCanvas } from "../../../..";
 import BError from "../../../../error/classes/BError";
+import BRenderGearCanvas from "../../../../graphics/2D/canvas/classes/BRenderGearCanvas";
+import BRenderGear from "../../../../graphics/common/classes/BRenderGear";
 import BEngine from "../../../common/classes/BEngine";
 import BWorld from "../../../common/classes/BWorld";
 
@@ -33,8 +34,7 @@ class BEngineCanvas extends BEngine
 	// ========================================================================
 
 	// == VAR
-    
-    private _canvas:HTMLCanvasElement;
+
     private _context:CanvasRenderingContext2D;
 
 	// == CONST
@@ -42,10 +42,9 @@ class BEngineCanvas extends BEngine
 	// == CONSTRUCTOR(S)
 	// ========================================================================
 
-	constructor(id:string, canvas:HTMLCanvasElement, world?:BWorld)
+	constructor(id:string, container:HTMLDivElement, canvas:HTMLCanvasElement, world?:BWorld)
 	{
-		super(id, world);
-        this._canvas = canvas;
+		super(id, container, canvas, world);
 
         const context = this._canvas.getContext("2d");
 
@@ -67,11 +66,6 @@ class BEngineCanvas extends BEngine
 
 	// == GETTER(S) AND SETTER(S)
 	// ========================================================================
-
-    get canvas():HTMLCanvasElement
-    {
-        return this._canvas;
-    }
 
     get context():CanvasRenderingContext2D
     {

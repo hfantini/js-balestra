@@ -19,19 +19,18 @@
 // == IMPORT(S)
 // ============================================================================
 
-import BTime from "../classes/BTime";
-import BUpdateGear from "../classes/BUpdateGear";
-import createBScreenMock from "./BScreenMock";
-
 // == METHOD(S) & EVENT(S)
 // ========================================================================
 
-const createBUpdateGearMock = ():BUpdateGear =>
+const createDomContainerMock = ():HTMLDivElement =>
 {
-    return new BUpdateGear(new BTime(), createBScreenMock());
+    return {
+        clientWidth: 300,
+        clientHeight: 300,
+    } as HTMLDivElement;
 }
 
 // == EXPORTS
 // ============================================================================
 
-export default createBUpdateGearMock;
+export default createDomContainerMock;

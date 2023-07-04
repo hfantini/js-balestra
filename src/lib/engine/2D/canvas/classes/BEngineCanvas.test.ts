@@ -19,6 +19,7 @@
 import BError from "../../../../error/classes/BError";
 import BRenderGearCanvas from "../../../../graphics/2D/canvas/classes/BRenderGearCanvas";
 import createHTMLCanvasElementMock, { createHTMLCanvasElementUnsupportedMock } from "../../../../graphics/2D/canvas/mocks/HTMLCanvasElementMock";
+import createDomContainerMock from "../../../common/mocks/BEngineMock";
 import BEngineCanvas from "./BEngineCanvas";
 
 // == IMPORT(S)
@@ -32,7 +33,6 @@ import BEngineCanvas from "./BEngineCanvas";
 
 describe("BEngineCanvas Tests", () => 
 {
-
     // == TEST ACTIONS(S)
     // ========================================================================
 
@@ -41,7 +41,7 @@ describe("BEngineCanvas Tests", () =>
 
     test("Constructor #1: Should create an instance with default values", () => 
 	{
-		const engine = new BEngineCanvas("Source2", createHTMLCanvasElementMock());
+		const engine = new BEngineCanvas("Source2", createDomContainerMock(), createHTMLCanvasElementMock());
         
         expect(engine).toBeDefined();
         expect(engine.canvas).toBeDefined();
@@ -50,12 +50,12 @@ describe("BEngineCanvas Tests", () =>
 
     test("Constructor #2: Should throw an exception with a device that doesn't support canvas", () => 
 	{
-		expect(() => new BEngineCanvas("Source2", createHTMLCanvasElementUnsupportedMock())).toThrowError(BError)
+		expect(() => new BEngineCanvas("Source2", createDomContainerMock(), createHTMLCanvasElementUnsupportedMock())).toThrowError(BError)
     });
     
     test("Method createRenderGear: Should return a valid instance of BRenderGearCanvas", () =>
     {
-        const engine = new BEngineCanvas("Source2", createHTMLCanvasElementMock());
+        const engine = new BEngineCanvas("Source2", createDomContainerMock(), createHTMLCanvasElementMock());
         const rGear = engine.createRenderGear() as BRenderGearCanvas;
 
         expect(rGear).toBeInstanceOf(BRenderGearCanvas);
