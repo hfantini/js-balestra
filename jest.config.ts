@@ -6,6 +6,7 @@ const config: Config = {
     clearMocks: true,
     transform: {
         '^.+\\.ts?$': 'ts-jest',
+        "^.+\\.tsx?$": "ts-jest"
     },
     setupFiles: ["jest-canvas-mock"],
     transformIgnorePatterns: ['<rootDir>/node_modules/'],
@@ -19,7 +20,7 @@ const config: Config = {
     },
     coveragePathIgnorePatterns: [
         "mocks"
-    ]
+    ],
 };
 
 export default config;
