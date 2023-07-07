@@ -14,8 +14,6 @@ This project is intended to be a simple graphical engine for web.
 
 Note: It's experimental and for study purposes only. The current status of this project is unfinished.
 
-<br/>
-
 # TECHNOLOGY
 
 - <a href="https://vitejs.dev/">Vite</a>
